@@ -1,0 +1,47 @@
+:root {
+  /* GYEOLDAM 기본 색상 팔레트 */
+  --color-background: #fbf8f1;
+  --color-surface: #f4eee4;
+  --color-header: #dfd0bd;
+  --color-brown-deep: #49382f;
+  --color-text: #463d37;
+  --color-text-muted: #81766e;
+  --color-border: #d8cec1;
+  --color-footer: #cbd4a7;
+  --color-error: #a83f36;
+  --color-focus: #665246;
+  --color-white: #ffffff;
+  --shadow-soft: 0 8px 24px rgb(73 56 47 / 10%);
+  --shadow-focus: 0 0 0 3px rgb(102 82 70 / 24%);
+  --font-family-base: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  --font-family-serif: "Noto Serif JP", "Yu Mincho", serif;
+  --content-max-width: 1200px;
+  --page-gutter: 40px;
+  --section-space: 96px;
+  --element-gap: 24px;
+  --radius-small: 2px;
+  --header-height: 78px;
+  --z-header: 100;
+  --z-mobile-menu: 200;
+  --breakpoint-mobile: 402px;
+  --breakpoint-tablet: 834px;
+}
+
+/* 태블릿 기준 폭(약 834px)에서 콘텐츠 여백을 조정합니다. */
+@media (max-width: 834px) {
+  :root {
+    --page-gutter: 32px;
+    --section-space: 72px;
+    --element-gap: 20px;
+  }
+}
+
+/* 모바일 디자인 기준 폭(402px)에서 사용할 기본 간격입니다. */
+@media (max-width: 402px) {
+  :root {
+    --page-gutter: 20px;
+    --section-space: 52px;
+    --element-gap: 16px;
+    --header-height: 62px;
+  }
+}

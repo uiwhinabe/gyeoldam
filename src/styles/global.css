@@ -1,0 +1,88 @@
+@import './variables.css';
+@import './reset.css';
+@import './components.css';
+@import './pages/treatment.css';
+@import './pages/about.css';
+@import './pages/reservation.css';
+@import './pages/mypage.css';
+@import './pages/reservation-manage.css';
+@import './pages/login.css';
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: var(--font-family-base);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-padding-top: calc(var(--header-height) + 16px);
+  scroll-behavior: smooth;
+}
+
+#root,
+.site-shell {
+  min-height: 100vh;
+}
+
+.site-shell {
+  display: flex;
+  flex-direction: column;
+}
+
+.site-content-row {
+  position: relative;
+  display: block;
+  width: 100%;
+  flex: 1;
+}
+
+.site-main {
+  width: 100%;
+  min-width: 0;
+}
+
+/* 라우팅 확인을 위한 임시 화면이며, 세부 페이지 구현 시 각 디자인으로 교체합니다. */
+.page-placeholder {
+  display: grid;
+  min-height: calc(100vh - var(--header-height));
+  place-items: center;
+  padding-block: var(--section-space);
+  text-align: center;
+}
+
+/* 홈 내부 링크 대상이 sticky 헤더와 내부 메뉴에 가려지지 않도록 합니다. */
+[id='campaign'],
+[id='gallery'],
+[id='sns'],
+[id='faq'],
+[id='access'] {
+  scroll-margin-top: calc(var(--header-height) + 74px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.page-placeholder__eyebrow {
+  margin-bottom: 12px;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+}
+
+.page-placeholder__title {
+  font-family: var(--font-family-serif);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+
+.page-placeholder__description {
+  margin-top: 16px;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}

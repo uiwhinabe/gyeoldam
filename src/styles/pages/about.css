@@ -1,0 +1,93 @@
+.about-page { background: var(--color-background); }
+.about-hero { position: relative; display: grid; width: 100%; max-width: none; min-height: clamp(420px, 50vw, 720px); overflow: hidden; place-items: center; color: var(--color-brown-deep); }
+.about-hero__background, .about-hero__overlay { position: absolute; inset: 0; }
+.about-hero__background { display: block; width: 100%; height: 100%; min-height: 0; border: 0; background: #f2e9dd; object-fit: cover; object-position: center; aspect-ratio: auto !important; }
+.about-hero__overlay { z-index: 1; background: rgb(255 252 247 / 10%); }
+.about-hero__content { position: relative; z-index: 2; text-align: center; }
+.about-hero__content p { font-size: .72rem; letter-spacing: .22em; }
+.about-hero__content h1 { margin-top: 14px; font-family: var(--font-family-serif); font-size: clamp(2.2rem, 6vw, 5rem); font-weight: 400; letter-spacing: .12em; }
+.brand-story, .salon-gallery, .director-profile, .staff-section { padding-block: var(--section-space); }
+.brand-story__introduction { max-width: 720px; margin: 34px auto 0; color: var(--color-text-muted); font-family: var(--font-family-serif); line-height: 2.2; text-align: center; white-space: pre-line; }
+.brand-story__features { display: grid; margin-top: 64px; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.brand-feature { padding: 38px 30px; border-top: 1px solid var(--color-brown-deep); background: var(--color-surface); }
+.brand-feature > span { color: var(--color-text-muted); font-size: .68rem; letter-spacing: .15em; }
+.brand-feature h3 { margin-top: 20px; color: var(--color-brown-deep); font-family: var(--font-family-serif); font-size: 1.25rem; font-weight: 400; }
+.brand-feature p { margin-top: 14px; color: var(--color-text-muted); font-size: .8rem; line-height: 1.9; }
+.brand-story__records { display: flex; justify-content: center; margin-top: 70px; gap: clamp(70px, 14vw, 180px); }
+.brand-story__records div { display: grid; text-align: center; }
+.brand-story__records strong { color: var(--color-brown-deep); font-family: var(--font-family-serif); font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 400; }
+.brand-story__records span { color: var(--color-text-muted); font-size: .68rem; letter-spacing: .18em; }
+.about-flower-banner { position: relative; display: grid; min-height: 430px; overflow: hidden; place-items: center; color: var(--color-white); }
+.about-flower-banner .image-placeholder, .about-flower-banner__overlay { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; aspect-ratio: auto !important; }
+.about-flower-banner__overlay { z-index: 1; background: rgb(54 41 34 / 42%); }
+.about-flower-banner > p { position: relative; z-index: 2; font-family: var(--font-family-serif); font-size: clamp(1.4rem, 3.5vw, 2.8rem); letter-spacing: .12em; line-height: 1.7; text-align: center; }
+.salon-gallery { background: var(--color-surface); }
+.salon-gallery__carousel { position: relative; width: 100%; margin-top: 48px; overflow: hidden; }
+.salon-gallery__viewport { display: flex; overflow-x: auto; gap: 2px; scroll-behavior: smooth; scrollbar-width: none; }
+.salon-gallery__viewport::-webkit-scrollbar { display: none; }
+.salon-gallery__slide { position: relative; min-width: 38vw; margin: 0; scroll-snap-align: start; }
+.salon-gallery__slide img, .salon-gallery__slide .image-placeholder { width: 100%; min-height: 0; border: 0; background: #e5dbcf; object-fit: cover; aspect-ratio: 16 / 9 !important; }
+.salon-gallery__arrow { position: absolute; z-index: 2; top: 50%; display: grid; width: 38px; height: 38px; border-radius: 50%; background: rgb(251 248 241 / 84%); color: var(--color-brown-deep); place-items: center; transform: translateY(-50%); }
+.salon-gallery__arrow:hover { background: var(--color-white); }
+.salon-gallery__arrow--prev { left: 20px; }
+.salon-gallery__arrow--next { right: 20px; }
+.salon-gallery__counter { margin-top: 16px; color: var(--color-text-muted); font-size: .68rem; letter-spacing: .15em; text-align: center; }
+.director-profile__layout { display: grid; max-width: 1000px; align-items: center; grid-template-columns: minmax(320px, .9fr) minmax(0, 1.1fr); gap: clamp(54px, 9vw, 120px); }
+.director-profile__media .image-placeholder { min-height: 0; border: 0; background: #e6dbce; }
+.director-profile__eyebrow { color: var(--color-text-muted); font-size: .7rem; letter-spacing: .18em; }
+.director-profile__content h2 { margin-top: 12px; font-family: var(--font-family-serif); font-size: 1.8rem; font-weight: 400; }
+.director-profile__name { margin-top: 6px; color: var(--color-brown-deep); letter-spacing: .12em; }
+.director-profile__message { margin-top: 26px; color: var(--color-text-muted); font-family: var(--font-family-serif); line-height: 2; }
+.director-profile__content ul { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--color-border); }
+.director-profile__content li { padding-block: 5px; color: var(--color-text-muted); font-size: .78rem; }
+.director-profile__content li::before { content: '— '; }
+.director-profile__instagram, .staff-card button { margin-top: 22px; border-bottom: 1px solid currentColor; color: var(--color-brown-deep); font-size: .72rem; }
+.staff-section { overflow: hidden; background: var(--color-surface); }
+.staff-carousel { margin-top: 48px; }
+.staff-carousel__track { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+.staff-card__media { overflow: hidden; }
+.staff-card__media img, .staff-card__media .image-placeholder { width: 100%; min-height: 0; border: 0; background: #e6dbce; aspect-ratio: 4 / 5 !important; object-fit: cover; }
+.staff-card > p { margin-top: 16px; color: var(--color-text-muted); font-size: .62rem; letter-spacing: .1em; }
+.staff-card h3 { margin-top: 4px; color: var(--color-brown-deep); font-family: var(--font-family-serif); font-size: 1.1rem; letter-spacing: .1em; }
+.staff-card button { margin-top: 10px; }
+.staff-carousel__controls { display: none; }
+.about-reservation-banner { position: relative; display: grid; min-height: 420px; overflow: hidden; align-items: center; color: var(--color-white); }
+.about-reservation-banner__background, .about-reservation-banner__overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
+.about-reservation-banner__background { min-height: 0; border: 0; background: #cfc2b3; aspect-ratio: auto !important; }
+.about-reservation-banner__overlay { z-index: 1; background: rgb(54 41 34 / 58%); }
+.about-reservation-banner__content { position: relative; z-index: 2; }
+.about-reservation-banner__content > p { font-size: .68rem; letter-spacing: .2em; }
+.about-reservation-banner__content h2 { margin-top: 14px; font-family: var(--font-family-serif); font-size: clamp(1.7rem, 4vw, 3rem); font-weight: 400; line-height: 1.7; }
+.about-reservation-banner__content .primary-button { margin-top: 28px; }
+@media (max-width: 834px) {
+  .brand-story__features { grid-template-columns: 1fr; gap: 14px; }
+  .salon-gallery__slide { min-width: 62vw; }
+  .director-profile__layout { grid-template-columns: 1fr; gap: 36px; }
+  .director-profile__media { max-width: 520px; }
+  .staff-carousel__viewport { overflow: hidden; }
+  .staff-carousel__track { display: flex; gap: 18px; transform: translateX(calc(var(--staff-index) * (-72% - 18px))); transition: transform 260ms ease; }
+  .staff-card { min-width: 72%; }
+  .staff-carousel__controls { display: flex; align-items: center; justify-content: space-between; margin-top: 26px; }
+  .staff-carousel__controls button { padding: 8px 0; border-bottom: 1px solid currentColor; font-size: .7rem; }
+  .staff-carousel__controls button:disabled { border-bottom-color: transparent; opacity: .35; }
+  .staff-carousel__controls span { color: var(--color-text-muted); font-size: .72rem; }
+}
+@media (max-width: 640px) {
+  .about-hero { width: 100%; }
+  .about-hero { min-height: 460px; }
+  .brand-story__introduction { font-size: .82rem; white-space: normal; }
+  .brand-story__features { margin-top: 42px; }
+  .brand-feature { padding: 28px 24px; }
+  .brand-story__records { margin-top: 48px; gap: 42px; }
+  .about-flower-banner { min-height: 340px; }
+  .salon-gallery__slide { min-width: 84vw; }
+  .salon-gallery__arrow { width: 34px; height: 34px; }
+  .salon-gallery__arrow--prev { left: 10px; }
+  .salon-gallery__arrow--next { right: 10px; }
+  .director-profile__media { width: 100%; }
+  .staff-card { min-width: 84%; }
+  .staff-carousel__track { transform: translateX(calc(var(--staff-index) * (-84% - 18px))); }
+  .about-reservation-banner { min-height: 390px; text-align: center; }
+  .about-reservation-banner__content .primary-button { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .staff-carousel__track { transition: none; } .salon-gallery__viewport { scroll-behavior: auto; } }
