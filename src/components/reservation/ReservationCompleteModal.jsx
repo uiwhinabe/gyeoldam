@@ -41,7 +41,7 @@ function ReservationCompleteModal({ reservation, onClose }) {
         </dl>
         <div className="reservation-complete__actions">
           <button type="button" onClick={onClose}>閉じる</button>
-          <Link to="/mypage">マイページの予約情報へ</Link>
+          <Link to="/mypage" state={{ scrollToUpcoming: true }}>マイページの予約情報へ</Link>
         </div>
       </div>
     </div>

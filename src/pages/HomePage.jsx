@@ -10,14 +10,16 @@ import SnsSection from '../components/home/SnsSection.jsx'
 function HomePage() {
   return (
     <>
-      <HomeHero />
-      <HomeSectionNav />
-      <CampaignSection />
-      <HomeReservationBanner />
-      <GallerySection />
-      <SnsSection />
-      <HomeMediaFaqSection />
-      <AccessSection />
+      <div className="home-main-campaign-flow">
+        <HomeHero />
+        <HomeSectionNav />
+        <CampaignSection />
+        <HomeReservationBanner />
+        <GallerySection />
+        <SnsSection />
+        <HomeMediaFaqSection />
+        <AccessSection />
+      </div>
     </>
   )
 }

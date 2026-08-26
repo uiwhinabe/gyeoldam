@@ -53,6 +53,7 @@ html {
 }
 
 /* 홈 내부 링크 대상이 sticky 헤더와 내부 메뉴에 가려지지 않도록 합니다. */
+[id='home'],
 [id='campaign'],
 [id='gallery'],
 [id='sns'],

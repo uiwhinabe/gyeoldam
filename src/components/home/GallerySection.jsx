@@ -44,11 +44,11 @@ function GallerySection() {
             >
               <div className="gallery-card__media">
                 {/* 홈 갤러리 비포·애프터 이미지
-                추후 권장 경로: /images/home/gallery-01.jpg 형식
-                data의 image 필드에 실제 이미지 경로 추가
+                저장 경로: /images/home/gallery/gallery-brow.png 형식
+                시술 카테고리에 맞는 실제 비포·애프터 이미지를 data에서 연결
                 */}
                 {item.image ? (
-                  <img src={item.image} alt={item.imageAlt} />
+                  <img className="gallery-card__image" src={item.image} alt={item.imageAlt} />
                 ) : (
                   <ImagePlaceholder
                     label={`BEFORE / AFTER ${String(index + 1).padStart(2, '0')}`}

@@ -1,4 +1,4 @@
-const homeSections = ['CAMPAIGN', 'GALLERY', 'SNS', 'FAQ', 'ACCESS']
+const homeSections = ['HOME', 'CAMPAIGN', 'GALLERY', 'SNS', 'FAQ', 'ACCESS']
 
 function HomeSectionNav() {
   return (

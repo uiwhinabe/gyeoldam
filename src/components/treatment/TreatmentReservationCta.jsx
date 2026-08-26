@@ -1,19 +1,14 @@
 import { Link } from 'react-router-dom'
 import Container from '../common/Container.jsx'
-import ImagePlaceholder from '../common/ImagePlaceholder.jsx'
 
 function TreatmentReservationCta() {
   return (
     <aside className="treatment-reservation-cta" aria-label="施術予約">
-      {/* 시술 메뉴 하단 예약 CTA 이미지
-      추후 권장 경로: /images/treatment/reservation-cta.jpg
-      실제 이미지 추가 시 이 플레이스홀더를 img 또는 background-image로 교체
-      */}
-      <ImagePlaceholder
+      {/* Figma 시술메뉴의 상담 장면을 사용한 하단 예약 CTA 이미지 */}
+      <img
         className="treatment-reservation-cta__background"
-        label="RESERVATION IMAGE"
-        aspectRatio="16 / 5"
-        ariaLabel="施術予約イメージ 準備中"
+        src={`${import.meta.env.BASE_URL}images/treatment/reservation-cta.png`}
+        alt="眉の仕上がりを確認するカウンセリング風景"
       />
       <div className="treatment-reservation-cta__overlay" aria-hidden="true" />
       <Container className="treatment-reservation-cta__content">

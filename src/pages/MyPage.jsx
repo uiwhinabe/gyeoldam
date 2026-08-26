@@ -1,4 +1,5 @@
-import { useSearchParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import MyPageNavigation from '../components/mypage/MyPageNavigation.jsx'
 import MemberProfile from '../components/mypage/MemberProfile.jsx'
 import NotificationSettings from '../components/mypage/NotificationSettings.jsx'
@@ -16,11 +17,18 @@ const tabContents = {
 }
 
 function MyPage() {
+  const location = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
   const requestedTab = searchParams.get('tab') || 'reservations'
   const activeTab = mypageTabs.some(({ id }) => id === requestedTab) ? requestedTab : 'reservations'
 
   const changeTab = (tab) => setSearchParams(tab === 'reservations' ? {} : { tab })
+
+  useEffect(() => {
+    if (location.state?.scrollToUpcoming) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    }
+  }, [location.key, location.state])
 
   return (
     <div className="mypage-page">

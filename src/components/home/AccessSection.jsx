@@ -8,20 +8,23 @@ const shopDetails = [
   { label: '営業時間', value: '10:00–20:00 / 不定休' },
 ]
 
+// TODO: 매장 위치 확정 후 실제 Google Maps 공유 링크로 교체합니다.
+const googleMapsUrl = 'https://maps.google.com/?q=GYEOLDAM'
+
 function AccessSection({ useFlowerImage = true }) {
   return (
     <section id="access" className="access-section" aria-labelledby="access-title">
       <Container>
         <SectionTitle id="access-title" eyebrow="ACCESS" title="アクセス" align="center" />
         <div className="access-section__visual">
-          {/* 홈 ACCESS 꽃 배경 이미지
-          저장 경로: /images/home/access-flower-background.png
+          {/* 홈 ACCESS 지도 영역 꽃 배경 이미지
+          저장 경로: /images/home/access-map-background.png
           추후 이미지 변경 시 같은 경로의 파일을 교체
           */}
           {useFlowerImage ? (
             <img
               className="access-section__flower-background"
-              src="/images/home/access-flower-background.png"
+              src={`${import.meta.env.BASE_URL}images/home/access-map-background.png`}
               alt="白い花が咲くGYEOLDAMアクセス背景"
             />
           ) : (
@@ -49,21 +52,29 @@ function AccessSection({ useFlowerImage = true }) {
               추후 권장 경로: /images/home/access-map.jpg
               TODO: 실제 주소 확정 후 Google Maps 또는 지도 이미지 연결
               */}
-              <button
+              <a
                 className="access-section__map-button"
-                type="button"
-                aria-label="Google Maps リンク準備中"
-                title="Google Maps リンク準備中"
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Google MapsでGYEOLDAMの位置を見る"
               >
-                {/* TODO: 매장 위치 확정 후 이 버튼을 Google Maps 외부 링크로 교체 */}
-                <ImagePlaceholder
-                  label="MAP"
-                  aspectRatio="16 / 9"
-                  ariaLabel="GYEOLDAM 店舗地図 準備中"
+                {/* ACCESS 매장 위치를 표시하는 지도 이미지 */}
+                <img
+                  className="access-section__map-image"
+                  src={`${import.meta.env.BASE_URL}images/home/access-map.png`}
+                  alt="GYEOLDAM 매장 위치를 표시한 지도"
                 />
-              </button>
+              </a>
             </div>
-            <p className="access-section__notice">Google Mapsで見る →</p>
+            <a
+              className="access-section__notice"
+              href={googleMapsUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Google Mapsで見る →
+            </a>
           </div>
         </div>
       </Container>

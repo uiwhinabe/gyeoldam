@@ -1,27 +1,36 @@
 import { Link } from 'react-router-dom'
 import Container from '../common/Container.jsx'
-import ImagePlaceholder from '../common/ImagePlaceholder.jsx'
 
 function HomeReservationBanner() {
   return (
     <section className="home-reservation-banner" aria-labelledby="reservation-banner-title">
       {/* 홈 시술 상담 예약 배너 배경 이미지
-      추후 권장 경로: /images/home/reservation-consultation.jpg
-      실제 이미지 추가 시 이 플레이스홀더를 img 또는 background-image로 교체
+      저장 경로: /images/home/reservation-cta.png
+      상담 장면을 담은 HOME 가로형 예약 CTA 배경 이미지
       */}
-      <ImagePlaceholder
+      <img
         className="home-reservation-banner__background"
-        label="カウンセリングイメージ"
-        aspectRatio="16 / 6"
-        ariaLabel="施術カウンセリング画像 準備中"
+        src={`${import.meta.env.BASE_URL}images/home/reservation-cta.png`}
+        alt="眉のデザインを確認するカウンセリング風景"
       />
       <div className="home-reservation-banner__overlay" aria-hidden="true" />
       <Container className="home-reservation-banner__content">
-        <p className="home-reservation-banner__eyebrow">RESERVATION</p>
-        <h2 id="reservation-banner-title">あなたらしい美しさを、一緒に。</h2>
-        <p>まずはカウンセリングから、お気軽にご相談ください。</p>
-        <Link className="primary-button home-reservation-banner__button" to="/reservation">
-          ご予約はこちら <span aria-hidden="true">→</span>
+        <h2 id="reservation-banner-title">
+          アートメイクの感動を、
+          <br />
+          あなたに。
+        </h2>
+        <p className="home-reservation-banner__guide">
+          ご予約はこちら
+          <span aria-hidden="true">↓</span>
+        </p>
+        <Link
+          className="home-reservation-banner__button"
+          to="/reservation"
+          state={{ scrollToTop: true }}
+          aria-label="ご予約はこちら"
+        >
+          <span>ご予約</span>
         </Link>
       </Container>
     </section>

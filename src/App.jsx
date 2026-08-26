@@ -29,7 +29,7 @@ function App() {
         <Route path="forgot-password" element={<ForgotPasswordPage />} />
       </Route>
 
-      {/* 정의되지 않은 주소는 홈으로 이동하며, 추후 404 페이지로 교체할 수 있습니다. */}
+      {/* ?뺤쓽?섏? ?딆? 二쇱냼???덉쑝濡??대룞?섎ŉ, 異뷀썑 404 ?섏씠吏濡?援먯껜?????덉뒿?덈떎. */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )

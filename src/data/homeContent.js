@@ -1,8 +1,8 @@
 export const officialSocials = [
-  { name: 'YouTube', handle: '@GYEOLDAM' },
-  { name: 'Instagram', handle: '@gyeoldam_official' },
-  { name: 'TikTok', handle: '@gyeoldam' },
-  { name: 'LINE', handle: 'GYEOLDAM Official' },
+  { name: 'YouTube', handle: '@GYEOLDAM', icon: 'youtube.png' },
+  { name: 'Instagram', handle: '@gyeoldam_official', icon: 'instagram.png' },
+  { name: 'TikTok', handle: '@gyeoldam', icon: 'tiktok.png' },
+  { name: 'LINE', handle: 'GYEOLDAM Official', icon: 'line.png' },
 ]
 
 export const frequentlyAskedQuestions = [
