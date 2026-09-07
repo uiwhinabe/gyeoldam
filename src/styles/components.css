@@ -501,6 +501,10 @@
   background: var(--color-header);
 }
 
+.site-shell:has(.treatment-page, .reservation-page, .mypage-page) .site-header {
+  border-bottom-color: transparent;
+}
+
 .site-header__inner {
   display: grid;
   width: min(100% - (var(--page-gutter) * 2), var(--content-max-width));
@@ -714,12 +718,12 @@
 .treatment-side-reservation {
   position: fixed;
   z-index: calc(var(--z-header) + 1);
-  top: 50%;
+  top: calc(var(--header-height) + clamp(150px, 18vw, 220px));
   right: 0;
-  width: clamp(48px, 4.5vw, 64px);
-  height: min(280px, calc(100vh - var(--header-height) - 48px));
+  width: clamp(42px, 4vw, 54px);
+  height: min(240px, calc(100vh - var(--header-height) - 48px));
   overflow: hidden;
-  border-radius: 28px 0 0 28px;
+  border-radius: 24px 0 0 24px;
   background: #aa8f70;
   transform: translateY(-50%);
 }
@@ -749,21 +753,21 @@
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .treatment-side-reservation {
-    width: 54px;
-    height: min(250px, calc(100vh - var(--header-height) - 40px));
-    border-radius: 24px 0 0 24px;
+    width: 46px;
+    height: min(215px, calc(100vh - var(--header-height) - 40px));
+    border-radius: 20px 0 0 20px;
   }
 }
 
 @media (max-width: 640px) {
   .treatment-side-reservation {
-    top: auto;
+    top: calc(var(--header-height) + 140px);
     right: 0;
-    bottom: 88px;
-    width: 46px;
-    height: 210px;
-    border-radius: 20px 0 0 20px;
-    transform: none;
+    bottom: auto;
+    width: 40px;
+    height: 180px;
+    border-radius: 17px 0 0 17px;
+    transform: translateY(-50%);
   }
 
   .treatment-side-reservation a {
@@ -1075,7 +1079,27 @@
 }
 
 .home-main-campaign-flow .home-section-nav {
-  background: rgb(247 238 223 / 92%);
+  border-block-color: transparent;
+  background: linear-gradient(
+    180deg,
+    #d5c1a7 0%,
+    #d6c1a6 50%,
+    #d6c0a4 100%
+  );
+  background-origin: border-box;
+  backdrop-filter: none;
+}
+
+/* Blend the photo's varying lower edge into the hero's existing beige. */
+.home-main-campaign-flow .home-hero::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: clamp(32px, 6vw, 96px);
+  background: linear-gradient(180deg, rgb(213 193 167 / 0) 0%, #d5c1a7 100%);
+  content: '';
+  pointer-events: none;
 }
 
 /* 캠페인 카드 프로모션 이미지는 이미지 안의 문구까지 모두 보이도록 원본 비율을 유지합니다. */

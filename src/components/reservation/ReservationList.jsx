@@ -1,4 +1,4 @@
-const formatWon = (amount) => `${amount.toLocaleString('ja-JP')}ウォン`
+import { formatDirectorSurcharge, formatReservationTotal, formatTreatmentPrice } from '../../data/treatments.js'
 
 function ReservationList({ items, onRemove, onDirectorChange, onAddAnother }) {
   return (
@@ -22,7 +22,7 @@ function ReservationList({ items, onRemove, onDirectorChange, onAddAnother }) {
                 <button type="button" aria-label={`${item.name}を削除`} onClick={() => onRemove(item.id)}>削除</button>
               </div>
               <dl>
-                <div><dt>基本料金</dt><dd>{formatWon(item.price)}</dd></div>
+                <div><dt>基本料金</dt><dd>{formatTreatmentPrice(item)}</dd></div>
                 <div>
                   <dt><label htmlFor={`director-${item.id}`}>院長指名</label></dt>
                   <dd>
@@ -36,8 +36,8 @@ function ReservationList({ items, onRemove, onDirectorChange, onAddAnother }) {
                     </select>
                   </dd>
                 </div>
-                <div><dt>指名追加料金</dt><dd>{formatWon(item.additionalFee)}</dd></div>
-                <div className="reservation-list-card__total"><dt>合計</dt><dd>{formatWon(item.finalAmount)}</dd></div>
+                <div><dt>指名追加料金</dt><dd>{item.additionalFee > 0 ? formatDirectorSurcharge(item) : '追加料金なし'}</dd></div>
+                <div className="reservation-list-card__total"><dt>合計</dt><dd>{formatReservationTotal(item.finalAmount, item.priceType === 'consultation')}</dd></div>
               </dl>
             </article>
           ))}

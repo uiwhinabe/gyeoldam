@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { reservationWeekdays } from '../../data/reservationAvailability.js'
+import { getReservationTotals } from '../../data/treatments.js'
 import { saveDemoCreatedReservation } from '../../utils/demoReservations.js'
 import ReservationCompleteModal from './ReservationCompleteModal.jsx'
 
@@ -52,7 +53,7 @@ function ReservationForm({ treatments, selectedDate, selectedTime }) {
 
     const now = new Date()
     const datePart = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`
-    const finalAmount = treatments.reduce((sum, item) => sum + item.finalAmount, 0)
+    const { finalAmount, hasConsultation } = getReservationTotals(treatments)
     const reservationDate = new Date(`${selectedDate}T00:00:00`)
     const reservationNumber = `GYE-${datePart}-${String(now.getTime()).slice(-4)}`
 
@@ -66,6 +67,7 @@ function ReservationForm({ treatments, selectedDate, selectedTime }) {
       customer: { ...fields },
       agreements: { ...agreements },
       finalAmount,
+      hasConsultation,
       prototypeOnly: true,
     }
     saveDemoCreatedReservation({
@@ -75,8 +77,19 @@ function ReservationForm({ treatments, selectedDate, selectedTime }) {
       time: selectedTime,
       status: '予約確定',
       treatments: treatments.map((item) => item.name),
+      treatmentDetails: treatments.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        priceType: item.priceType,
+        directorSurcharge: item.directorSurcharge,
+        directorSelected: item.directorSelected,
+        additionalFee: item.additionalFee,
+        finalAmount: item.finalAmount,
+      })),
       artist: treatments.some((item) => item.directorSelected) ? 'KIM GYEOL 院長' : '指名なし',
       price: finalAmount,
+      hasConsultation,
       duration: '所要時間は確認中',
       prototypeOnly: true,
     })

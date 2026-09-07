@@ -9,23 +9,39 @@ import ReservationSchedule from '../components/reservation/ReservationSchedule.j
 import ReservationSummary from '../components/reservation/ReservationSummary.jsx'
 import ReservationTabs from '../components/reservation/ReservationTabs.jsx'
 import TreatmentSelectionCard from '../components/reservation/TreatmentSelectionCard.jsx'
-import { treatmentCategories } from '../data/treatments.js'
+import { toLocalISO } from '../data/reservationAvailability.js'
+import { getTreatmentById, getTreatmentByName, treatmentCategories } from '../data/treatments.js'
+
+const SELECTION_STORAGE_KEY = 'gyeoldam-reservation-treatment-selection'
+
+const createReservationItem = (treatment, directorSelected = false) => {
+  const additionalFee = directorSelected ? treatment.directorSurcharge : 0
+  return {
+    ...treatment,
+    directorSelected,
+    additionalFee,
+    finalAmount: (treatment.price ?? 0) + additionalFee,
+  }
+}
 
 function ReservationPage() {
   const location = useLocation()
   const [activeCategory, setActiveCategory] = useState(treatmentCategories[0].id)
   const [selectedTreatments, setSelectedTreatments] = useState(() => {
     const rebookNames = location.state?.rebookTreatments || []
-    return rebookNames.flatMap((name) => {
-      for (const category of treatmentCategories) {
-        const index = category.items.findIndex((item) => item.name === name)
-        if (index === -1) continue
-        const treatment = category.items[index]
-        const price = Number(treatment.price.replace(/[^0-9]/g, ''))
-        return [{ id: `${category.id}-${index}`, name, price, directorSelected: false, additionalFee: 0, finalAmount: price }]
-      }
+    if (rebookNames.length > 0) return rebookNames.map(getTreatmentByName).filter(Boolean).map((treatment) => createReservationItem(treatment))
+
+    try {
+      const savedSelections = JSON.parse(window.localStorage.getItem(SELECTION_STORAGE_KEY) || '[]')
+      return savedSelections
+        .map(({ id, directorSelected }) => {
+          const treatment = getTreatmentById(id)
+          return treatment ? createReservationItem(treatment, directorSelected) : null
+        })
+        .filter(Boolean)
+    } catch {
       return []
-    })
+    }
   })
   const [pendingSelection, setPendingSelection] = useState(null)
   const [desktopSelection, setDesktopSelection] = useState(null)
@@ -34,7 +50,7 @@ function ReservationPage() {
     const now = new Date()
     return new Date(now.getFullYear(), now.getMonth(), 1)
   })
-  const [selectedDate, setSelectedDate] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(() => toLocalISO(new Date()))
   const [selectedTime, setSelectedTime] = useState(null)
 
   const currentCategory = treatmentCategories.find(({ id }) => id === activeCategory)
@@ -45,16 +61,7 @@ function ReservationPage() {
   }
 
   const addTreatment = (treatmentId, treatment, directorOption) => {
-    const basePrice = Number(treatment.price.replace(/[^0-9]/g, ''))
-    const additionalFee = directorOption === 'director' ? 200000 : 0
-    const reservationItem = {
-      id: treatmentId,
-      name: treatment.name,
-      price: basePrice,
-      directorSelected: directorOption === 'director',
-      additionalFee,
-      finalAmount: basePrice + additionalFee,
-    }
+    const reservationItem = createReservationItem(treatment, directorOption === 'director')
 
     setSelectedTreatments((current) => {
       if (current.some((item) => item.id === treatmentId)) return current
@@ -68,6 +75,12 @@ function ReservationPage() {
     const timer = window.setTimeout(() => setShowAddedNotice(false), 4000)
     return () => window.clearTimeout(timer)
   }, [showAddedNotice])
+
+  useEffect(() => {
+    window.localStorage.setItem(SELECTION_STORAGE_KEY, JSON.stringify(
+      selectedTreatments.map(({ id, directorSelected }) => ({ id, directorSelected })),
+    ))
+  }, [selectedTreatments])
 
   const handleAdd = (treatmentId, treatment) => {
     if (selectedTreatments.some((item) => item.id === treatmentId)) {
@@ -107,12 +120,12 @@ function ReservationPage() {
   const changeDirectorOption = (treatmentId, directorSelected) => {
     setSelectedTreatments((current) => current.map((item) => {
       if (item.id !== treatmentId) return item
-      const additionalFee = directorSelected ? 200000 : 0
+      const additionalFee = directorSelected ? item.directorSurcharge : 0
       return {
         ...item,
         directorSelected,
         additionalFee,
-        finalAmount: item.price + additionalFee,
+        finalAmount: (item.price ?? 0) + additionalFee,
       }
     }))
   }
@@ -152,13 +165,13 @@ function ReservationPage() {
           </div>
 
           <div className="reservation-selection__grid">
-            {currentCategory.items.map((treatment, index) => {
-              const treatmentId = `${currentCategory.id}-${index}`
+            {currentCategory.items.map((treatment) => {
+              const treatmentId = treatment.id
               return (
                 <TreatmentSelectionCard
                   key={treatmentId}
                   treatment={treatment}
-                  treatmentId={treatmentId}
+                  treatmentId={treatment.id}
                   isSelected={selectedTreatments.some((item) => item.id === treatmentId)}
                   onAdd={handleAdd}
                 />

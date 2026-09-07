@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
-
-const formatWon = (amount) => `${amount.toLocaleString('ja-JP')}ウォン`
+import { formatReservationTotal } from '../../data/treatments.js'
 
 function ReservationHistoryCard({ reservation, isPast }) {
   return (
@@ -18,7 +17,7 @@ function ReservationHistoryCard({ reservation, isPast }) {
         <h3>{reservation.treatments.join(' ＋ ')}</h3>
         <dl>
           <div><dt>担当者</dt><dd>{reservation.artist}</dd></div>
-          <div><dt>施術料金</dt><dd>{formatWon(reservation.price)}</dd></div>
+          <div><dt>施術料金</dt><dd>{formatReservationTotal(reservation.price, reservation.hasConsultation)}</dd></div>
           <div><dt>所要時間</dt><dd>{reservation.duration}</dd></div>
         </dl>
         <div className="mypage-reservation-card__actions">

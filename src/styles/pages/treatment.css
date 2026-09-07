@@ -4,7 +4,7 @@
 
 .treatment-page__hero {
   padding: clamp(70px, 9vw, 130px) var(--page-gutter);
-  background: var(--color-surface);
+  background: linear-gradient(to bottom, var(--color-header) 0%, var(--color-header) 8%, var(--color-background) 100%);
   color: var(--color-brown-deep);
   text-align: center;
 }
@@ -67,7 +67,7 @@
 }
 
 .treatment-category {
-  padding-block: 78px;
+  padding-block: 62px;
   scroll-margin-top: calc(var(--header-height) + 82px);
 }
 
@@ -99,17 +99,17 @@
 
 .treatment-category__items {
   display: grid;
-  margin-top: 48px;
-  gap: 52px;
+  margin-top: 40px;
+  gap: 42px;
 }
 
 .treatment-item {
   display: grid;
-  max-width: 960px;
+  max-width: 900px;
   align-items: center;
   margin-inline: auto;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(48px, 8vw, 110px);
+  gap: clamp(40px, 6.5vw, 88px);
 }
 
 .treatment-item:nth-child(even) .treatment-item__media {
@@ -117,7 +117,7 @@
 }
 
 .treatment-item__media {
-  width: min(100%, 360px);
+  width: min(100%, 315px);
   justify-self: end;
   overflow: hidden;
   border-radius: 50%;
@@ -261,12 +261,12 @@
 
 @media (max-width: 834px) {
   .treatment-category {
-    padding-block: 64px;
+    padding-block: 52px;
   }
 
   .treatment-item {
     grid-template-columns: minmax(190px, 0.7fr) minmax(0, 1.3fr);
-    gap: 36px;
+    gap: 30px;
   }
 
   .treatment-item:nth-child(even) .treatment-item__media {

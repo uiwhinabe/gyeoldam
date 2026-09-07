@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { formatDirectorSurcharge } from '../../data/treatments.js'
 
 function DesktopReservationFlow({ selection, onClose, onConfirm }) {
   const [directorOption, setDirectorOption] = useState('none')
@@ -56,7 +57,7 @@ function DesktopReservationFlow({ selection, onClose, onConfirm }) {
           <label>
             <input type="radio" name="desktop-director" value="director" checked={directorOption === 'director'} onChange={(event) => setDirectorOption(event.target.value)} />
             <span>院長を指名</span>
-            <strong>＋200,000ウォン</strong>
+            <strong>{formatDirectorSurcharge(selection.treatment)}</strong>
           </label>
         </fieldset>
 

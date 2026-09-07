@@ -57,14 +57,6 @@ function LoginPage() {
 
   return (
     <div className="login-page">
-      <div className="login-page__visual">
-        {/* 로그인 꽃 배경 이미지
-        저장 경로: /images/login/flower-background.png
-        추후 이미지 변경 시 같은 경로의 파일을 교체
-        */}
-        <img src="/images/login/flower-background.png" alt="白い花に囲まれたログイン背景" />
-      </div>
-
       <main className="login-page__content">
         <div className="login-panel">
           <header><p>MEMBER</p><h1>LOGIN</h1><span>ログインしてご予約情報をご確認いただけます。</span></header>

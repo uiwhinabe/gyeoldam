@@ -9,7 +9,7 @@ export const homeCampaigns = [
   {
     id: 'first-visit',
     title: 'ペア割キャンペーン',
-    description: 'ご友人やご家族と一緒にまつげパーマをご予約いただくと、お一人様10,000ウォンずつ割引いたします。',
+    description: 'ご友人やご家族と一緒にまつ毛パーマをご予約いただくと、お一人様10,000ウォンずつ割引いたします。',
     image: `${import.meta.env.BASE_URL}images/home/campaign/cards/campaign-card-02.png`,
     imageAlt: '友人や家族と利用できるまつ毛パーマキャンペーン',
   },

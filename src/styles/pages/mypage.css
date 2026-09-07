@@ -1,5 +1,5 @@
 .mypage-page { min-height: 100vh; background: var(--color-background); }
-.mypage-page__hero { padding: clamp(58px, 7vw, 96px) var(--page-gutter); background: var(--color-surface); color: var(--color-brown-deep); text-align: center; }
+.mypage-page__hero { padding: clamp(58px, 7vw, 96px) var(--page-gutter); background: linear-gradient(to bottom, var(--color-header) 0%, var(--color-header) 8%, var(--color-background) 100%); color: var(--color-brown-deep); text-align: center; }
 .mypage-page__hero p { color: var(--color-text-muted); font-size: .66rem; letter-spacing: .2em; }
 .mypage-page__hero h1 { margin-top: 9px; font-family: var(--font-family-serif); font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 400; letter-spacing: .1em; }
 .mypage-page__layout { display: grid; align-items: start; padding-block: var(--section-space); grid-template-columns: 230px minmax(0, 1fr); gap: clamp(44px, 7vw, 90px); }

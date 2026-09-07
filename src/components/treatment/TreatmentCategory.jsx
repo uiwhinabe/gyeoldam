@@ -1,5 +1,6 @@
 import Container from '../common/Container.jsx'
 import ImagePlaceholder from '../common/ImagePlaceholder.jsx'
+import { formatDirectorSurcharge, formatTreatmentPrice } from '../../data/treatments.js'
 
 function TreatmentCategory({ category }) {
   return (
@@ -34,9 +35,9 @@ function TreatmentCategory({ category }) {
                 <p className="treatment-item__description">{item.description}</p>
                 <div className="treatment-item__price">
                   <span>施術料金</span>
-                  <strong>{item.price}</strong>
+                  <strong>{formatTreatmentPrice(item)}</strong>
                 </div>
-                {item.directorFee && <p className="treatment-item__director">※ {item.directorFee}</p>}
+                {item.directorSurcharge > 0 && <p className="treatment-item__director">※ 院長指名　{formatDirectorSurcharge(item)}</p>}
               </div>
             </article>
           ))}

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { formatDirectorSurcharge } from '../../data/treatments.js'
 
 function DirectorBottomSheet({ isOpen, treatment, onClose, onConfirm }) {
   const [directorOption, setDirectorOption] = useState('none')
@@ -69,7 +70,7 @@ function DirectorBottomSheet({ isOpen, treatment, onClose, onConfirm }) {
               onChange={(event) => setDirectorOption(event.target.value)}
             />
             <span>院長を指名</span>
-            <strong>＋200,000ウォン</strong>
+            <strong>{formatDirectorSurcharge(treatment)}</strong>
           </label>
         </fieldset>
 

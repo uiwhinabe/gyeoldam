@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { mypageReservations } from '../data/mypageReservations.js'
+import { formatReservationTotal } from '../data/treatments.js'
 import { applyDemoReservationOverride, getDemoCreatedReservations } from '../utils/demoReservations.js'
-
-const formatWon = (amount) => `${amount.toLocaleString('ja-JP')}ウォン`
 
 function ReservationManagePage() {
   const { id } = useParams()
@@ -24,7 +23,7 @@ function ReservationManagePage() {
             <div><dt>予約日時</dt><dd>{reservation.date} ({reservation.weekday}) {reservation.time}</dd></div>
             <div><dt>施術</dt><dd>{reservation.treatments.join(' ＋ ')}</dd></div>
             <div><dt>担当者</dt><dd>{reservation.artist}</dd></div>
-            <div><dt>金額</dt><dd>{formatWon(reservation.price)}</dd></div>
+            <div><dt>金額</dt><dd>{formatReservationTotal(reservation.price, reservation.hasConsultation)}</dd></div>
             <div><dt>予約番号</dt><dd>{reservation.id}</dd></div>
           </dl>
         </section>

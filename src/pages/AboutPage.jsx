@@ -12,11 +12,12 @@ function AboutPage() {
       <AboutHero />
       <BrandStory />
       <SalonGallery />
-      <DirectorProfile />
-      <StaffCarousel />
+      <div className="about-people-frame">
+        <DirectorProfile />
+        <StaffCarousel />
+      </div>
       <AboutReservationBanner />
-      {/* HomePage의 ACCESS 구조를 재사용하며 About 사진 원칙에 따라 배경은 플레이스홀더로 표시합니다. */}
-      <AccessSection useFlowerImage={false} />
+      <div className="about-access"><AccessSection useFlowerImage /></div>
     </div>
   )
 }

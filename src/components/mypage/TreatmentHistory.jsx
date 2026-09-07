@@ -1,7 +1,6 @@
 import { treatmentHistory } from '../../data/mypageData.js'
+import { formatWon } from '../../data/treatments.js'
 import ImagePlaceholder from '../common/ImagePlaceholder.jsx'
-
-const formatWon = (amount) => `${amount.toLocaleString('ja-JP')}ウォン`
 
 function TreatmentHistory() {
   return (

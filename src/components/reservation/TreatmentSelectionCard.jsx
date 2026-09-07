@@ -1,17 +1,14 @@
 import ImagePlaceholder from '../common/ImagePlaceholder.jsx'
+import { formatDirectorSurcharge, formatTreatmentPrice } from '../../data/treatments.js'
 
 function TreatmentSelectionCard({ treatment, treatmentId, isSelected, onAdd }) {
   return (
     <article className={`reservation-treatment-card${isSelected ? ' reservation-treatment-card--selected' : ''}`}>
       <div className="reservation-treatment-card__media">
-        {/* 예약 시술 카드 이미지
-        권장 경로: /images/treatment/{카테고리}-{번호}.jpg
-        공통 treatment data의 image 필드에 경로 추가 시 실제 img로 자동 교체
-        */}
-        {treatment.image ? (
-          <img src={treatment.image} alt={treatment.imageAlt} />
+        {treatment.reservationImage ? (
+          <img src={treatment.reservationImage} alt={treatment.reservationImageAlt} />
         ) : (
-          <ImagePlaceholder label="TREATMENT" aspectRatio="4 / 3" ariaLabel={`${treatment.imageAlt} 画像準備中`} />
+          <ImagePlaceholder label={treatment.name} aspectRatio="4 / 3" ariaLabel={`${treatment.reservationImageAlt} 準備中`} />
         )}
       </div>
       <div className="reservation-treatment-card__body">
@@ -22,9 +19,9 @@ function TreatmentSelectionCard({ treatment, treatmentId, isSelected, onAdd }) {
         <p className="reservation-treatment-card__description">{treatment.description}</p>
         <div className="reservation-treatment-card__price">
           <span>施術料金</span>
-          <strong>{treatment.price}</strong>
+          <strong>{formatTreatmentPrice(treatment)}</strong>
         </div>
-        {treatment.directorFee && <p className="reservation-treatment-card__director">※ {treatment.directorFee}</p>}
+        {treatment.directorSurcharge > 0 && <p className="reservation-treatment-card__director">※ 院長指名　{formatDirectorSurcharge(treatment)}</p>}
       </div>
       <button
         className="reservation-treatment-card__add"

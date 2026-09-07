@@ -1,5 +1,5 @@
 .reservation-page { min-height: 100vh; background: var(--color-background); }
-.reservation-page__hero { padding: clamp(64px, 8vw, 112px) var(--page-gutter); background: var(--color-surface); color: var(--color-brown-deep); text-align: center; }
+.reservation-page__hero { padding: clamp(64px, 8vw, 112px) var(--page-gutter); background: linear-gradient(to bottom, var(--color-header) 0%, var(--color-header) 8%, var(--color-background) 100%); color: var(--color-brown-deep); text-align: center; }
 .reservation-page__hero > p { color: var(--color-text-muted); font-size: .68rem; letter-spacing: .2em; }
 .reservation-page__hero h1 { margin-top: 10px; font-family: var(--font-family-serif); font-size: clamp(2rem, 5vw, 4rem); font-weight: 400; letter-spacing: .14em; }
 .reservation-page__hero > span { display: block; margin-top: 16px; color: var(--color-text-muted); font-size: .8rem; }
@@ -13,19 +13,21 @@
 .reservation-selection__heading p { color: var(--color-text-muted); font-size: .72rem; letter-spacing: .14em; }
 .reservation-selection__heading h2 { margin-top: 5px; color: var(--color-brown-deep); font-family: var(--font-family-serif); font-size: 1.7rem; font-weight: 400; }
 .reservation-selection__heading > span { color: var(--color-brown-deep); font-size: .78rem; }
-.reservation-selection__grid { display: grid; margin-top: 36px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
-.reservation-treatment-card { position: relative; display: grid; overflow: hidden; grid-template-columns: 180px minmax(0, 1fr); border: 1px solid var(--color-border); background: var(--color-white); transition: border-color 180ms ease, box-shadow 180ms ease; }
+.reservation-selection__grid { display: grid; margin-top: 36px; grid-template-columns: repeat(2, 460px); justify-content: center; gap: 22px; }
+.reservation-treatment-card { position: relative; display: grid; width: 460px; height: 260px; grid-template-columns: 180px 280px; border: 1px solid var(--color-border); background: var(--color-white); transition: border-color 180ms ease, box-shadow 180ms ease; }
 .reservation-treatment-card--selected { border: 2px solid var(--color-brown-deep); box-shadow: var(--shadow-soft); }
-.reservation-treatment-card__media img, .reservation-treatment-card__media .image-placeholder { width: 100%; height: 100%; min-height: 230px; border: 0; object-fit: cover; aspect-ratio: auto !important; }
-.reservation-treatment-card__body { padding: 25px 56px 25px 24px; }
+.reservation-treatment-card__media { min-width: 0; height: 100%; overflow: hidden; }
+.reservation-treatment-card__media img, .reservation-treatment-card__media .image-placeholder { width: 100%; height: 100%; min-height: 0; border: 0; object-fit: cover; aspect-ratio: auto !important; }
+.reservation-treatment-card__media img { padding: 24px; object-fit: contain; object-position: center; }
+.reservation-treatment-card__body { min-width: 0; padding: 25px 56px 25px 24px; }
 .reservation-treatment-card__heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-.reservation-treatment-card__heading h2 { color: var(--color-brown-deep); font-family: var(--font-family-serif); font-size: 1.15rem; font-weight: 400; line-height: 1.5; }
+.reservation-treatment-card__heading h2 { color: var(--color-brown-deep); font-family: var(--font-family-serif); font-size: 1.15rem; font-weight: 400; line-height: 1.5; word-break: keep-all; overflow-wrap: normal; }
 .reservation-treatment-card__selected-label { flex: 0 0 auto; padding: 3px 6px; background: var(--color-footer); color: var(--color-brown-deep); font-size: .58rem; }
 .reservation-treatment-card__description { margin-top: 12px; color: var(--color-text-muted); font-size: .74rem; line-height: 1.8; }
 .reservation-treatment-card__price { display: flex; align-items: baseline; margin-top: 18px; padding-top: 13px; border-top: 1px solid var(--color-border); gap: 10px; }
 .reservation-treatment-card__price span { color: var(--color-text-muted); font-size: .68rem; }
-.reservation-treatment-card__price strong { color: var(--color-brown-deep); font-family: var(--font-family-serif); font-size: 1rem; font-weight: 500; }
-.reservation-treatment-card__director { margin-top: 5px; color: var(--color-error); font-size: .7rem; }
+.reservation-treatment-card__price strong { color: var(--color-brown-deep); font-family: var(--font-family-serif); font-size: 1rem; font-weight: 500; white-space: nowrap; }
+.reservation-treatment-card__director { margin-top: 5px; color: var(--color-error); font-size: .7rem; white-space: nowrap; }
 .reservation-treatment-card__add { position: absolute; right: 14px; bottom: 14px; display: grid; width: 34px; height: 34px; border: 1px solid var(--color-brown-deep); border-radius: 50%; color: var(--color-brown-deep); place-items: center; }
 .reservation-treatment-card__add:hover, .reservation-treatment-card__add[aria-pressed='true'] { background: var(--color-brown-deep); color: var(--color-white); }
 .reservation-schedule { padding-block: var(--section-space); background: var(--color-background); }
@@ -175,10 +177,17 @@
 .reservation-complete__actions { display: flex; justify-content: center; margin-top: 30px; gap: 14px; }
 .reservation-complete__actions button, .reservation-complete__actions a { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding: 10px 18px; border: 1px solid var(--color-brown-deep); color: var(--color-brown-deep); font-size: .75rem; }
 .reservation-complete__actions a { background: var(--color-brown-deep); color: var(--color-white); }
-@media (max-width: 900px) {
-  .reservation-treatment-card { grid-template-columns: 140px minmax(0, 1fr); }
-  .reservation-treatment-card__media img, .reservation-treatment-card__media .image-placeholder { min-height: 245px; }
-  .reservation-treatment-card__body { padding-left: 18px; }
+@media (max-width: 1024px) {
+  .reservation-selection__grid { grid-template-columns: repeat(2, 334px); gap: 16px; }
+  .reservation-treatment-card { width: 334px; height: 260px; grid-template-columns: 104px 230px; }
+  .reservation-treatment-card__media img { padding: 14px; }
+  .reservation-treatment-card__body { padding: 18px 46px 18px 14px; }
+  .reservation-treatment-card__heading h2 { font-size: 1rem; }
+  .reservation-treatment-card__description { font-size: .7rem; }
+  .reservation-treatment-card__price { display: grid; gap: 1px; }
+}
+@media (max-width: 767px) {
+  .reservation-selection__grid { grid-template-columns: 334px; }
 }
 @media (max-width: 834px) {
   .reservation-schedule__layout { grid-template-columns: 1fr; }
@@ -192,13 +201,6 @@
   .reservation-tabs__scroll::-webkit-scrollbar { display: none; }
   .reservation-tabs__button { min-width: max-content; padding-inline: 22px; }
   .reservation-selection { padding-block: 46px 64px; }
-  .reservation-selection__grid { grid-template-columns: 1fr; gap: 16px; }
-  .reservation-treatment-card { grid-template-columns: 116px minmax(0, 1fr); }
-  .reservation-treatment-card__media img, .reservation-treatment-card__media .image-placeholder { min-height: 220px; }
-  .reservation-treatment-card__body { padding: 20px 52px 20px 16px; }
-  .reservation-treatment-card__heading h2 { font-size: 1rem; }
-  .reservation-treatment-card__description { font-size: .7rem; }
-  .reservation-treatment-card__price { display: grid; gap: 1px; }
   .reservation-schedule { padding-block: 58px; }
   .reservation-schedule__layout { margin-top: 30px; gap: 18px; }
   .reservation-calendar, .reservation-time { padding: 24px 18px; }

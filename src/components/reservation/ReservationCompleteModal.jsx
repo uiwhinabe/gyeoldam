@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-
-const formatWon = (amount) => `${amount.toLocaleString('ja-JP')}ウォン`
+import { formatReservationTotal } from '../../data/treatments.js'
 
 function ReservationCompleteModal({ reservation, onClose }) {
   const closeButtonRef = useRef(null)
@@ -37,7 +36,7 @@ function ReservationCompleteModal({ reservation, onClose }) {
           <div><dt>お名前</dt><dd>{reservation.customer.name}</dd></div>
           <div><dt>施術</dt><dd>{reservation.treatments.map((item) => item.name).join('、')}</dd></div>
           <div><dt>予約日時</dt><dd>{reservation.date} {reservation.time}</dd></div>
-          <div><dt>合計</dt><dd>{formatWon(reservation.finalAmount)}</dd></div>
+          <div><dt>合計</dt><dd>{formatReservationTotal(reservation.finalAmount, reservation.hasConsultation)}</dd></div>
         </dl>
         <div className="reservation-complete__actions">
           <button type="button" onClick={onClose}>閉じる</button>
