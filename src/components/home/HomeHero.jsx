@@ -24,11 +24,13 @@ function HomeHero() {
           <img src={`${import.meta.env.BASE_URL}images/home/reservation-visual.png`} alt="眉の施術前カウンセリング" />
           <div className="home-hero__reservation-overlay" aria-hidden="true" />
           <div className="home-hero__reservation-content">
-            <h1 id="home-hero-title">あなたらしい美しさを、もっと素敵に。</h1>
-            <p>一人ひとりに寄り添う、丁寧な施術を。</p>
-            <Link className="primary-button home-hero__reservation-button" to="/reservation">
+            <h1 id="home-hero-title">
+              <span>あなたらしい美しさを、もっと美しく。</span>
+              <span>一人ひとりに寄り添う、丁寧な施術を。</span>
+            </h1>
+            <Link className="home-hero__reservation-button" to="/reservation">
               ご予約はこちら
-              <span aria-hidden="true">→</span>
+              <span aria-hidden="true">▲</span>
             </Link>
           </div>
         </article>

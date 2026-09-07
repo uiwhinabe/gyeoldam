@@ -2529,3 +2529,85 @@
     font-size: 12px;
   }
 }
+
+/* Keep the hero invitation portrait-shaped and centered at every breakpoint. */
+.home-hero__reservation-card {
+  container-type: inline-size;
+  width: min(100%, 360px);
+  max-width: 360px;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 36 / 41;
+  border: 1px solid rgb(91 82 70 / 45%);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgb(52 39 29 / 12%);
+}
+
+.home-hero__reservation-overlay {
+  background: rgb(47 41 34 / 38%);
+}
+
+.home-hero__reservation-content {
+  --reservation-extra-gap: clamp(20px, 7cqi, 26px);
+  --title-line-gap: clamp(2px, .76cqi, 2.8px);
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Balance the added spacing so the first title line stays in place. */
+  padding: calc(20px + var(--reservation-extra-gap) + var(--title-line-gap)) 12px 20px;
+  gap: clamp(48px, 24cqi, 86px);
+  text-align: center;
+}
+
+.home-hero__reservation-content h1 {
+  font-family: var(--font-family-serif);
+  font-size: clamp(10px, 3.8cqi, 14px);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: .06em;
+}
+
+.home-hero__reservation-content h1 > span {
+  display: block;
+  white-space: nowrap;
+}
+
+.home-hero__reservation-content h1 > span + span {
+  margin-top: var(--title-line-gap);
+}
+
+.home-hero__reservation-button {
+  display: flex;
+  width: auto;
+  min-width: 0;
+  min-height: 44px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: var(--reservation-extra-gap) 0 0;
+  padding: 4px 12px;
+  border: 0;
+  background: transparent;
+  color: var(--color-white);
+  font-family: var(--font-family-serif);
+  font-size: clamp(11px, 3.8cqi, 14px);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: .06em;
+  gap: 3px;
+}
+
+.home-hero__reservation-button > span {
+  font-size: 9px;
+  line-height: 1;
+}
+
+.home-hero__reservation-button:hover {
+  background: transparent;
+  color: var(--color-white);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
