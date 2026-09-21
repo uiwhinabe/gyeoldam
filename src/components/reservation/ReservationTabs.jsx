@@ -1,6 +1,8 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 function ReservationTabs({ categories, activeCategory, onSelect }) {
+  const { t } = useLanguage()
   return (
-    <nav className="reservation-tabs" aria-label="予約施術カテゴリー">
+    <nav className="reservation-tabs" aria-label={t("予約施術カテゴリー")}>
       <div className="container reservation-tabs__scroll">
         {categories.map(({ id, tabLabel }) => (
           <button
@@ -10,7 +12,7 @@ function ReservationTabs({ categories, activeCategory, onSelect }) {
             aria-pressed={activeCategory === id}
             onClick={() => onSelect(id)}
           >
-            {tabLabel}
+            {t(tabLabel)}
           </button>
         ))}
       </div>

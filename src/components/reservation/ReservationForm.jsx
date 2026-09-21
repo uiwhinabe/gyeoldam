@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useMemo, useState } from 'react'
 import { reservationWeekdays } from '../../data/reservationAvailability.js'
 import { getReservationTotals } from '../../data/treatments.js'
@@ -18,6 +19,7 @@ const validateFields = (fields) => {
 }
 
 function ReservationForm({ treatments, selectedDate, selectedTime }) {
+  const { t } = useLanguage()
   const [fields, setFields] = useState(initialFields)
   const [agreements, setAgreements] = useState(initialAgreements)
   const [touched, setTouched] = useState({})
@@ -101,7 +103,7 @@ function ReservationForm({ treatments, selectedDate, selectedTime }) {
     const errorId = `${name}-error`
     return (
       <label className={`reservation-form__field${error ? ' reservation-form__field--error' : ''}`}>
-        <span>{label}{required && <b>必須</b>}</span>
+        <span>{t(label)}{required && <b>{t("必須")}</b>}</span>
         <input
           type={type}
           name={name}
@@ -112,7 +114,7 @@ function ReservationForm({ treatments, selectedDate, selectedTime }) {
           onChange={updateField}
           onBlur={() => setTouched((current) => ({ ...current, [name]: true }))}
         />
-        {error && <small id={errorId}>{error}</small>}
+        {error && <small id={errorId}>{t(error)}</small>}
       </label>
     )
   }
@@ -121,8 +123,8 @@ function ReservationForm({ treatments, selectedDate, selectedTime }) {
     <section className="reservation-form-section" aria-labelledby="reservation-form-title">
       <div className="container">
         <header className="reservation-form-section__heading">
-          <p>STEP 03</p>
-          <h2 id="reservation-form-title">予約者情報</h2>
+          <p>{t("STEP 03")}</p>
+          <h2 id="reservation-form-title">{t("予約者情報")}</h2>
         </header>
 
         <form className="reservation-form" noValidate onSubmit={handleSubmit}>
@@ -130,19 +132,19 @@ function ReservationForm({ treatments, selectedDate, selectedTime }) {
             {field('name', 'お名前', 'text', true)}
             {field('email', 'メールアドレス', 'email', true)}
             <label className={`reservation-form__field${touched.phone && errors.phone ? ' reservation-form__field--error' : ''}`}>
-              <span>電話番号<b>必須</b></span>
+              <span>{t("電話番号")}<b>{t("必須")}</b></span>
               <div className="reservation-form__phone">
                 <select
                   name="countryCode"
                   value={fields.countryCode}
-                  aria-label="国番号"
+                  aria-label={t("国番号")}
                   onChange={updateField}
                 >
-                  <option value="+81">日本 +81</option>
-                  <option value="+82">韓国 +82</option>
-                  <option value="+1">アメリカ +1</option>
-                  <option value="+86">中国 +86</option>
-                  <option value="+886">台湾 +886</option>
+                  <option value="+81">{t("日本 +81")}</option>
+                  <option value="+82">{t("韓国 +82")}</option>
+                  <option value="+1">{t("アメリカ +1")}</option>
+                  <option value="+86">{t("中国 +86")}</option>
+                  <option value="+886">{t("台湾 +886")}</option>
                 </select>
                 <input
                   type="tel"
@@ -150,34 +152,34 @@ function ReservationForm({ treatments, selectedDate, selectedTime }) {
                   value={fields.phone}
                   required
                   inputMode="tel"
-                  placeholder="90-1234-5678"
+                  placeholder={t("90-1234-5678")}
                   aria-invalid={Boolean(touched.phone && errors.phone)}
                   aria-describedby={touched.phone && errors.phone ? 'phone-error' : undefined}
                   onChange={updateField}
                   onBlur={() => setTouched((current) => ({ ...current, phone: true }))}
                 />
               </div>
-              {touched.phone && errors.phone && <small id="phone-error">{errors.phone}</small>}
+              {touched.phone && errors.phone && <small id="phone-error">{t(errors.phone)}</small>}
             </label>
             {field('lineId', 'LINE ID（任意）')}
             <label className="reservation-form__field reservation-form__field--wide">
-              <span>お問い合わせ・ご要望</span>
+              <span>{t("お問い合わせ・ご要望")}</span>
               <textarea name="requests" rows="5" value={fields.requests} onChange={updateField} />
             </label>
           </div>
 
           <fieldset className="reservation-agreements">
-            <legend>同意事項</legend>
-            <label className="reservation-agreements__all"><input type="checkbox" checked={allAgreed} onChange={(event) => toggleAll(event.target.checked)} /><span>すべてに同意する</span></label>
-            <label><input type="checkbox" checked={agreements.privacy} onChange={(event) => updateAgreement('privacy', event.target.checked)} /><span><b>必須</b> 個人情報の取り扱いに同意する</span></label>
-            <label><input type="checkbox" checked={agreements.cancellation} onChange={(event) => updateAgreement('cancellation', event.target.checked)} /><span><b>必須</b> 予約・キャンセル規定に同意する</span></label>
-            <label><input type="checkbox" checked={agreements.marketing} onChange={(event) => updateAgreement('marketing', event.target.checked)} /><span><i>任意</i> キャンペーン・マーケティング通知を受け取る</span></label>
-            {agreementTouched && !requiredAgreed && <small>必須の同意事項を確認してください。</small>}
+            <legend>{t("同意事項")}</legend>
+            <label className="reservation-agreements__all"><input type="checkbox" checked={allAgreed} onChange={(event) => toggleAll(event.target.checked)} /><span>{t("すべてに同意する")}</span></label>
+            <label><input type="checkbox" checked={agreements.privacy} onChange={(event) => updateAgreement('privacy', event.target.checked)} /><span><b>{t("必須")}</b>{t(" 個人情報の取り扱いに同意する")}</span></label>
+            <label><input type="checkbox" checked={agreements.cancellation} onChange={(event) => updateAgreement('cancellation', event.target.checked)} /><span><b>{t("必須")}</b>{t(" 予約・キャンセル規定に同意する")}</span></label>
+            <label><input type="checkbox" checked={agreements.marketing} onChange={(event) => updateAgreement('marketing', event.target.checked)} /><span><i>{t("任意")}</i>{t(" キャンペーン・マーケティング通知を受け取る")}</span></label>
+            {agreementTouched && !requiredAgreed && <small>{t("必須の同意事項を確認してください。")}</small>}
           </fieldset>
 
-          {!prerequisitesReady && <p className="reservation-form__prerequisite">施術・予約日・予約時間をすべて選択してください。</p>}
-          <button className="primary-button reservation-form__submit" type="submit" disabled={!canSubmit}>予約を申し込む</button>
-          <p className="reservation-form__prototype">※ 現在はプロトタイプのため、実際の予約・決済は行われません。</p>
+          {!prerequisitesReady && <p className="reservation-form__prerequisite">{t("施術・予約日・予約時間をすべて選択してください。")}</p>}
+          <button className="primary-button reservation-form__submit" type="submit" disabled={!canSubmit}>{t("予約を申し込む")}</button>
+          <p className="reservation-form__prototype">{t("※ 現在はプロトタイプのため、実際の予約・決済は行われません。")}</p>
         </form>
       </div>
 

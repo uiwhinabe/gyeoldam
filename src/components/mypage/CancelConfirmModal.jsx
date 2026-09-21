@@ -1,6 +1,8 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useEffect, useRef } from 'react'
 
 function CancelConfirmModal({ isOpen, onClose, onConfirm }) {
+  const { t } = useLanguage()
   const panelRef = useRef(null)
 
   useEffect(() => {
@@ -33,12 +35,12 @@ function CancelConfirmModal({ isOpen, onClose, onConfirm }) {
 
   return (
     <div className="cancel-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="cancel-confirm-title">
-      <button className="cancel-confirm-modal__dim" type="button" aria-label="閉じる" onClick={onClose} />
+      <button className="cancel-confirm-modal__dim" type="button" aria-label={t("閉じる")} onClick={onClose} />
       <div ref={panelRef} className="cancel-confirm-modal__panel">
         <span className="cancel-confirm-modal__warning" aria-hidden="true">!</span>
-        <h2 id="cancel-confirm-title">予約をキャンセルしますか？</h2>
-        <p>キャンセル後は元に戻すことができません。</p>
-        <div><button type="button" onClick={onClose}>いいえ</button><button type="button" onClick={onConfirm}>キャンセルする</button></div>
+        <h2 id="cancel-confirm-title">{t("予約をキャンセルしますか？")}</h2>
+        <p>{t("キャンセル後は元に戻すことができません。")}</p>
+        <div><button type="button" onClick={onClose}>{t("いいえ")}</button><button type="button" onClick={onConfirm}>{t("キャンセルする")}</button></div>
       </div>
     </div>
   )

@@ -1,9 +1,11 @@
+import { useLanguage } from '../i18n/useLanguage.js'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 
 function LoginPage() {
+  const { t } = useLanguage()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -59,11 +61,11 @@ function LoginPage() {
     <div className="login-page">
       <main className="login-page__content">
         <div className="login-panel">
-          <header><p>MEMBER</p><h1>LOGIN</h1><span>ログインしてご予約情報をご確認いただけます。</span></header>
+          <header><p>{t("MEMBER")}</p><h1>{t("LOGIN")}</h1><span>{t("ログインしてご予約情報をご確認いただけます。")}</span></header>
 
           <form className="login-form" noValidate onSubmit={handleSubmit}>
             <label className={`login-form__field${emailError ? ' login-form__field--error' : ''}`}>
-              <span>メールアドレス</span>
+              <span>{t("メールアドレス")}</span>
               <input
                 type="email"
                 name="email"
@@ -75,11 +77,11 @@ function LoginPage() {
                 onChange={updateEmail}
                 onBlur={() => setTouched((current) => ({ ...current, email: true }))}
               />
-              <small id="login-email-error">{emailError || '\u00a0'}</small>
+              <small id="login-email-error">{t(emailError || '\u00a0')}</small>
             </label>
 
             <label className={`login-form__field${passwordError ? ' login-form__field--error' : ''}`}>
-              <span>パスワード</span>
+              <span>{t("パスワード")}</span>
               <div className="login-form__password">
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -93,27 +95,27 @@ function LoginPage() {
                 />
                 <button
                   type="button"
-                  aria-label={showPassword ? 'パスワードを非表示にする' : 'パスワードを表示する'}
+                  aria-label={t(showPassword ? 'パスワードを非表示にする' : 'パスワードを表示する')}
                   aria-pressed={showPassword}
                   onClick={() => setShowPassword((visible) => !visible)}
                 >
-                  {showPassword ? '非表示' : '表示'}
+                  {t(showPassword ? '非表示' : '表示')}
                 </button>
               </div>
-              <small id="login-password-error">{passwordError || '\u00a0'}</small>
+              <small id="login-password-error">{t(passwordError || '\u00a0')}</small>
             </label>
 
             <div className="login-form__options">
-              <label><input type="checkbox" checked={rememberMe} onChange={(event) => setRememberMe(event.target.checked)} /><span>ログイン状態を保持する</span></label>
-              <Link to="/forgot-password">パスワードをお忘れの方</Link>
+              <label><input type="checkbox" checked={rememberMe} onChange={(event) => setRememberMe(event.target.checked)} /><span>{t("ログイン状態を保持する")}</span></label>
+              <Link to="/forgot-password">{t("パスワードをお忘れの方")}</Link>
             </div>
 
-            <div className={`login-form__auth-message${statusMessage ? ' login-form__auth-message--success' : ''}`} role="alert">{authError || statusMessage || '\u00a0'}</div>
-            <button className="primary-button login-form__submit" type="submit" disabled={!canSubmit}>ログイン</button>
+            <div className={`login-form__auth-message${statusMessage ? ' login-form__auth-message--success' : ''}`} role="alert">{t(authError || statusMessage || '\u00a0')}</div>
+            <button className="primary-button login-form__submit" type="submit" disabled={!canSubmit}>{t("ログイン")}</button>
           </form>
 
-          <div className="login-panel__divider"><span>OR</span></div>
-          <div className="login-panel__join"><p>まだ会員登録がお済みでない方</p><Link to="/join">新規会員登録</Link></div>
+          <div className="login-panel__divider"><span>{t("OR")}</span></div>
+          <div className="login-panel__join"><p>{t("まだ会員登録がお済みでない方")}</p><Link to="/join">{t("新規会員登録")}</Link></div>
         </div>
       </main>
     </div>

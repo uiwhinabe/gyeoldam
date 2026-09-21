@@ -1,7 +1,9 @@
+import { useLanguage } from '../i18n/useLanguage.js'
 import PagePlaceholder from '../components/common/PagePlaceholder.jsx'
 
 function ForgotPasswordPage() {
-  return <PagePlaceholder eyebrow="PASSWORD" title="パスワードをお忘れの方" />
+  const { t } = useLanguage()
+  return <PagePlaceholder eyebrow={t("PASSWORD")} title={t("パスワードをお忘れの方")} />
 }
 
 export default ForgotPasswordPage

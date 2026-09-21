@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useState } from 'react'
 import { initialMemberProfile } from '../../data/mypageData.js'
 
@@ -11,6 +12,7 @@ const validate = (profile) => {
 }
 
 function MemberProfile() {
+  const { t } = useLanguage()
   const [profile, setProfile] = useState(initialMemberProfile)
   const [draft, setDraft] = useState(initialMemberProfile)
   const [isEditing, setIsEditing] = useState(false)
@@ -38,22 +40,22 @@ function MemberProfile() {
 
   return (
     <section className="mypage-detail-section" aria-labelledby="member-profile-title">
-      <header className="mypage-detail-section__header"><p>MEMBER PROFILE</p><h2 id="member-profile-title">会員情報</h2></header>
+      <header className="mypage-detail-section__header"><p>{t("MEMBER PROFILE")}</p><h2 id="member-profile-title">{t("会員情報")}</h2></header>
       {isEditing ? (
         <form className="member-profile-form" noValidate onSubmit={saveProfile}>
           {fields.map(({ name, label, type }) => (
             <label key={name} className={errors[name] ? 'member-profile-form__error' : ''}>
-              <span>{label}</span>
+              <span>{t(label)}</span>
               <input type={type} name={name} value={draft[name]} aria-invalid={Boolean(errors[name])} onChange={updateDraft} />
-              {errors[name] && <small>{errors[name]}</small>}
+              {errors[name] && <small>{t(errors[name])}</small>}
             </label>
           ))}
-          <div className="mypage-form-actions"><button type="button" onClick={cancelEditing}>キャンセル</button><button type="submit">保存する</button></div>
+          <div className="mypage-form-actions"><button type="button" onClick={cancelEditing}>{t("キャンセル")}</button><button type="submit">{t("保存する")}</button></div>
         </form>
       ) : (
         <div className="member-profile-view">
-          <dl>{fields.map(({ name, label }) => <div key={name}><dt>{label}</dt><dd>{profile[name]}</dd></div>)}</dl>
-          <button type="button" onClick={startEditing}>会員情報を変更</button>
+          <dl>{fields.map(({ name, label }) => <div key={name}><dt>{t(label)}</dt><dd>{profile[name]}</dd></div>)}</dl>
+          <button type="button" onClick={startEditing}>{t("会員情報を変更")}</button>
         </div>
       )}
     </section>

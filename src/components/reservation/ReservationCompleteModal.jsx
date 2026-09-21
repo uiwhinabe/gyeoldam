@@ -1,8 +1,10 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { formatReservationTotal } from '../../data/treatments.js'
 
 function ReservationCompleteModal({ reservation, onClose }) {
+  const { t } = useLanguage()
   const closeButtonRef = useRef(null)
 
   useEffect(() => {
@@ -28,19 +30,19 @@ function ReservationCompleteModal({ reservation, onClose }) {
   return (
     <div className="reservation-complete" role="dialog" aria-modal="true" aria-labelledby="reservation-complete-title">
       <div className="reservation-complete__panel">
-        <button ref={closeButtonRef} className="reservation-complete__close" type="button" aria-label="閉じる" onClick={onClose}>×</button>
-        <p className="reservation-complete__eyebrow">RESERVATION COMPLETE</p>
-        <h2 id="reservation-complete-title">ご予約を受け付けました。</h2>
-        <p className="reservation-complete__number">予約番号 <strong>{reservation.reservationNumber}</strong></p>
+        <button ref={closeButtonRef} className="reservation-complete__close" type="button" aria-label={t("閉じる")} onClick={onClose}>×</button>
+        <p className="reservation-complete__eyebrow">{t("RESERVATION COMPLETE")}</p>
+        <h2 id="reservation-complete-title">{t("ご予約を受け付けました。")}</h2>
+        <p className="reservation-complete__number">{t("予約番号 ")}<strong>{t(reservation.reservationNumber)}</strong></p>
         <dl>
-          <div><dt>お名前</dt><dd>{reservation.customer.name}</dd></div>
-          <div><dt>施術</dt><dd>{reservation.treatments.map((item) => item.name).join('、')}</dd></div>
-          <div><dt>予約日時</dt><dd>{reservation.date} {reservation.time}</dd></div>
-          <div><dt>合計</dt><dd>{formatReservationTotal(reservation.finalAmount, reservation.hasConsultation)}</dd></div>
+          <div><dt>{t("お名前")}</dt><dd>{reservation.customer.name}</dd></div>
+          <div><dt>{t("施術")}</dt><dd>{reservation.treatments.map((item) => t(item.name)).join('、')}</dd></div>
+          <div><dt>{t("予約日時")}</dt><dd>{t(reservation.date)} {t(reservation.time)}</dd></div>
+          <div><dt>{t("合計")}</dt><dd>{t(formatReservationTotal(reservation.finalAmount, reservation.hasConsultation))}</dd></div>
         </dl>
         <div className="reservation-complete__actions">
-          <button type="button" onClick={onClose}>閉じる</button>
-          <Link to="/mypage" state={{ scrollToUpcoming: true }}>マイページの予約情報へ</Link>
+          <button type="button" onClick={onClose}>{t("閉じる")}</button>
+          <Link to="/mypage" state={{ scrollToUpcoming: true }}>{t("マイページの予約情報へ")}</Link>
         </div>
       </div>
     </div>

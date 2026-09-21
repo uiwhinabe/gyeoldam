@@ -1,7 +1,9 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useEffect, useRef, useState } from 'react'
 import { formatDirectorSurcharge } from '../../data/treatments.js'
 
 function DirectorBottomSheet({ isOpen, treatment, onClose, onConfirm }) {
+  const { t } = useLanguage()
   const [directorOption, setDirectorOption] = useState('none')
   const panelRef = useRef(null)
 
@@ -42,15 +44,15 @@ function DirectorBottomSheet({ isOpen, treatment, onClose, onConfirm }) {
 
   return (
     <div className="director-sheet" role="dialog" aria-modal="true" aria-labelledby="director-sheet-title">
-      <button className="director-sheet__dim" type="button" aria-label="閉じる" onClick={onClose} />
+      <button className="director-sheet__dim" type="button" aria-label={t("閉じる")} onClick={onClose} />
       <div ref={panelRef} className="director-sheet__panel">
         <div className="director-sheet__handle" aria-hidden="true" />
-        <button className="director-sheet__close" type="button" aria-label="閉じる" onClick={onClose}>×</button>
-        <h2 id="director-sheet-title">院長指名</h2>
-        <p className="director-sheet__treatment">{treatment.name}</p>
+        <button className="director-sheet__close" type="button" aria-label={t("閉じる")} onClick={onClose}>×</button>
+        <h2 id="director-sheet-title">{t("院長指名")}</h2>
+        <p className="director-sheet__treatment">{t(treatment.name)}</p>
 
         <fieldset className="director-sheet__options">
-          <legend className="visually-hidden">院長指名を選択</legend>
+          <legend className="visually-hidden">{t("院長指名を選択")}</legend>
           <label>
             <input
               type="radio"
@@ -59,7 +61,7 @@ function DirectorBottomSheet({ isOpen, treatment, onClose, onConfirm }) {
               checked={directorOption === 'none'}
               onChange={(event) => setDirectorOption(event.target.value)}
             />
-            <span>指名なし</span>
+            <span>{t("指名なし")}</span>
           </label>
           <label>
             <input
@@ -69,8 +71,8 @@ function DirectorBottomSheet({ isOpen, treatment, onClose, onConfirm }) {
               checked={directorOption === 'director'}
               onChange={(event) => setDirectorOption(event.target.value)}
             />
-            <span>院長を指名</span>
-            <strong>{formatDirectorSurcharge(treatment)}</strong>
+            <span>{t("院長を指名")}</span>
+            <strong>{t(formatDirectorSurcharge(treatment))}</strong>
           </label>
         </fieldset>
 
@@ -79,9 +81,7 @@ function DirectorBottomSheet({ isOpen, treatment, onClose, onConfirm }) {
           className="primary-button director-sheet__confirm"
           type="button"
           onClick={() => onConfirm(directorOption)}
-        >
-          予約リストに追加
-        </button>
+        >{t("予約リストに追加")}</button>
       </div>
     </div>
   )

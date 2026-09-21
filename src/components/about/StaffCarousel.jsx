@@ -1,8 +1,10 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useEffect, useRef, useState } from 'react'
 import { aboutStaff } from '../../data/about.js'
 import Container from '../common/Container.jsx'
 
 function StaffCarousel() {
+  const { t } = useLanguage()
   const [currentIndex, setCurrentIndex] = useState(0)
   const viewportRef = useRef(null)
   const cardRefs = useRef([])
@@ -78,13 +80,13 @@ function StaffCarousel() {
   }, [count])
 
   return (
-    <section className="staff-section" aria-label="スタッフ紹介">
+    <section className="staff-section" aria-label={t("スタッフ紹介")}>
       <Container>
         <div
           className="staff-carousel"
           role="region"
           aria-roledescription="carousel"
-          aria-label="スタッフプロフィール"
+          aria-label={t("スタッフプロフィール")}
           tabIndex="0"
           onKeyDown={handleKeyDown}
         >
@@ -97,29 +99,29 @@ function StaffCarousel() {
                     className={`staff-card${copy !== 1 ? ' staff-card--clone' : ''}`}
                     aria-hidden={copy !== 1 ? true : undefined}
                     ref={(node) => { cardRefs.current[position] = node }}
-                    aria-label={`${index + 1} / ${aboutStaff.length}: ${staff.name}`}
+                    aria-label={t(`${index + 1} / ${aboutStaff.length}: ${staff.name}`)}
                   >
                     <div className="staff-card__media">
-                      <img className={`staff-card__portrait staff-card__portrait--${staff.imagePosition}`} src={staff.image} alt={staff.imageAlt} />
+                      <img className={`staff-card__portrait staff-card__portrait--${staff.imagePosition}`} src={staff.image} alt={t(staff.imageAlt)} />
                     </div>
                     <div className="staff-card__content">
-                      <h3>{staff.name}</h3>
-                      <p className="staff-card__local-name">{staff.localName}</p>
-                      <p className="staff-card__description">{staff.description}</p>
-                      <a tabIndex={copy !== 1 ? -1 : undefined} href={staff.instagramUrl} target="_blank" rel="noreferrer" aria-label={`${staff.name} Instagramを開く`}>
+                      <h3>{t(staff.name)}</h3>
+                      <p className="staff-card__local-name">{t(staff.localName)}</p>
+                      <p className="staff-card__description">{t(staff.description)}</p>
+                      <a tabIndex={copy !== 1 ? -1 : undefined} href={staff.instagramUrl} target="_blank" rel="noreferrer" aria-label={t(`${staff.name} Instagramを開く`)}>
                         <img className="staff-card__instagram-icon" src={`${import.meta.env.BASE_URL}images/about/staff/instagram-icon.png`} alt="" aria-hidden="true" />
-                        <span>{staff.instagram}</span>
+                        <span>{t(staff.instagram)}</span>
                       </a>
                     </div>
                   </article>
                 ))}
               </div>
             </div>
-            <button className="staff-carousel__arrow staff-carousel__arrow--prev" type="button" onClick={() => moveTo(-1)} aria-label="前のスタッフ" />
-            <button className="staff-carousel__arrow staff-carousel__arrow--next" type="button" onClick={() => moveTo(1)} aria-label="次のスタッフ" />
+            <button className="staff-carousel__arrow staff-carousel__arrow--prev" type="button" onClick={() => moveTo(-1)} aria-label={t("前のスタッフ")} />
+            <button className="staff-carousel__arrow staff-carousel__arrow--next" type="button" onClick={() => moveTo(1)} aria-label={t("次のスタッフ")} />
           </div>
           <div className="staff-carousel__controls">
-            <span aria-live="polite">{currentIndex + 1} / {aboutStaff.length}</span>
+            <span aria-live="polite">{t(currentIndex + 1)} / {t(aboutStaff.length)}</span>
           </div>
         </div>
       </Container>

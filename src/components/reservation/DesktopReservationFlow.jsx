@@ -1,7 +1,9 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useEffect, useRef, useState } from 'react'
 import { formatDirectorSurcharge } from '../../data/treatments.js'
 
 function DesktopReservationFlow({ selection, onClose, onConfirm }) {
+  const { t } = useLanguage()
   const [directorOption, setDirectorOption] = useState('none')
   const panelRef = useRef(null)
 
@@ -42,28 +44,28 @@ function DesktopReservationFlow({ selection, onClose, onConfirm }) {
 
   return (
     <div className="desktop-reservation-flow" role="dialog" aria-modal="true" aria-labelledby="desktop-flow-title">
-      <button className="desktop-reservation-flow__dim" type="button" aria-label="閉じる" onClick={onClose} />
+      <button className="desktop-reservation-flow__dim" type="button" aria-label={t("閉じる")} onClick={onClose} />
       <div ref={panelRef} className="desktop-reservation-flow__panel">
-        <button className="desktop-reservation-flow__close" type="button" aria-label="閉じる" onClick={onClose}>×</button>
-        <h2 id="desktop-flow-title">院長指名をご希望ですか？</h2>
-        <p className="desktop-reservation-flow__treatment">{selection.treatment.name}</p>
+        <button className="desktop-reservation-flow__close" type="button" aria-label={t("閉じる")} onClick={onClose}>×</button>
+        <h2 id="desktop-flow-title">{t("院長指名をご希望ですか？")}</h2>
+        <p className="desktop-reservation-flow__treatment">{t(selection.treatment.name)}</p>
 
         <fieldset className="desktop-reservation-flow__options">
-          <legend className="visually-hidden">院長指名を選択</legend>
+          <legend className="visually-hidden">{t("院長指名を選択")}</legend>
           <label>
             <input type="radio" name="desktop-director" value="none" checked={directorOption === 'none'} onChange={(event) => setDirectorOption(event.target.value)} />
-            <span>指名なし</span>
+            <span>{t("指名なし")}</span>
           </label>
           <label>
             <input type="radio" name="desktop-director" value="director" checked={directorOption === 'director'} onChange={(event) => setDirectorOption(event.target.value)} />
-            <span>院長を指名</span>
-            <strong>{formatDirectorSurcharge(selection.treatment)}</strong>
+            <span>{t("院長を指名")}</span>
+            <strong>{t(formatDirectorSurcharge(selection.treatment))}</strong>
           </label>
         </fieldset>
 
         <div className="desktop-reservation-flow__actions">
-          <button className="desktop-flow-button desktop-flow-button--outline" type="button" onClick={onClose}>戻る</button>
-          <button className="desktop-flow-button desktop-flow-button--filled" type="button" onClick={() => onConfirm(directorOption)}>予約リストに追加</button>
+          <button className="desktop-flow-button desktop-flow-button--outline" type="button" onClick={onClose}>{t("戻る")}</button>
+          <button className="desktop-flow-button desktop-flow-button--filled" type="button" onClick={() => onConfirm(directorOption)}>{t("予約リストに追加")}</button>
         </div>
       </div>
     </div>

@@ -1,9 +1,13 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { primaryNavigation } from '../../data/navigation.js'
 import MobileMenu from './MobileMenu.jsx'
+import LanguageSelector from './LanguageSelector.jsx'
 
 function Header() {
+  const { t } = useLanguage()
+  const { pathname } = useLocation()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
@@ -13,7 +17,7 @@ function Header() {
           <button
             className="site-header__menu-button"
             type="button"
-            aria-label="メニューを開く"
+            aria-label={t("メニューを開く")}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation"
             onClick={() => setIsMenuOpen(true)}
@@ -23,11 +27,9 @@ function Header() {
             <span aria-hidden="true" />
           </button>
 
-          <Link className="site-header__logo" to="/" aria-label="GYEOLDAM ホーム">
-            GYEOLDAM
-          </Link>
+          <Link className="site-header__logo" to="/" aria-label={t("GYEOLDAM ホーム")}>{t("GYEOLDAM")}</Link>
 
-          <nav className="site-header__navigation" aria-label="メインメニュー">
+          <nav className="site-header__navigation" aria-label={t("メインメニュー")}>
             {primaryNavigation.map(({ label, to, end }) => (
               <NavLink
                 key={to}
@@ -37,18 +39,12 @@ function Header() {
                 to={to}
                 end={end}
               >
-                {label}
+                {t(label)}
               </NavLink>
             ))}
           </nav>
 
-          <span className="site-header__language" aria-label="現在の言語 日本語">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18" />
-            </svg>
-            <span>JP</span>
-          </span>
+          <LanguageSelector key={pathname} />
         </div>
       </header>
 

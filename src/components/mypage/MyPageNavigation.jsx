@@ -1,9 +1,11 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { mypageTabs } from '../../data/mypageNavigation.js'
 
 function MyPageNavigation({ activeTab, onTabChange }) {
+  const { t } = useLanguage()
   return (
-    <nav className="mypage-navigation" aria-label="マイページメニュー">
-      <p>MY PAGE</p>
+    <nav className="mypage-navigation" aria-label={t("マイページメニュー")}>
+      <p>{t("MY PAGE")}</p>
       <div className="mypage-navigation__tabs" role="tablist" aria-orientation="vertical">
         {mypageTabs.map(({ id, label }) => (
           <button
@@ -16,7 +18,7 @@ function MyPageNavigation({ activeTab, onTabChange }) {
             aria-controls={`mypage-panel-${id}`}
             onClick={() => onTabChange(id)}
           >
-            {label}
+            {t(label)}
           </button>
         ))}
       </div>

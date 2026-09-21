@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import Container from '../common/Container.jsx'
 import ImagePlaceholder from '../common/ImagePlaceholder.jsx'
 import SectionTitle from '../common/SectionTitle.jsx'
@@ -12,10 +13,11 @@ const shopDetails = [
 const googleMapsUrl = 'https://maps.google.com/?q=GYEOLDAM'
 
 function AccessSection({ useFlowerImage = true }) {
+  const { t } = useLanguage()
   return (
     <section id="access" className="access-section" aria-labelledby="access-title">
       <Container>
-        <SectionTitle id="access-title" eyebrow="ACCESS" title="アクセス" align="center" />
+        <SectionTitle id="access-title" eyebrow={t("ACCESS")} title={t("アクセス")} align="center" />
         <div className="access-section__visual">
           {/* 홈 ACCESS 지도 영역 꽃 배경 이미지
           저장 경로: /images/home/access-map-background.png
@@ -25,24 +27,24 @@ function AccessSection({ useFlowerImage = true }) {
             <img
               className="access-section__flower-background"
               src={`${import.meta.env.BASE_URL}images/home/access-map-background.png`}
-              alt="白い花が咲くGYEOLDAMアクセス背景"
+              alt={t("白い花が咲くGYEOLDAMアクセス背景")}
             />
           ) : (
             <ImagePlaceholder
               className="access-section__flower-background"
-              label="ACCESS BACKGROUND"
+              label={t("ACCESS BACKGROUND")}
               aspectRatio="16 / 8"
-              ariaLabel="ABOUT ACCESS 背景画像 準備中"
+              ariaLabel={t("ABOUT ACCESS 背景画像 準備中")}
             />
           )}
 
           <div className="access-section__information">
-            <p className="access-section__brand">GYEOLDAM</p>
+            <p className="access-section__brand">{t("GYEOLDAM")}</p>
             <dl>
               {shopDetails.map(({ label, value }) => (
                 <div key={label}>
-                  <dt>{label}</dt>
-                  <dd>{value}</dd>
+                  <dt>{t(label)}</dt>
+                  <dd>{t(value)}</dd>
                 </div>
               ))}
             </dl>
@@ -57,13 +59,13 @@ function AccessSection({ useFlowerImage = true }) {
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Google MapsでGYEOLDAMの位置を見る"
+                aria-label={t("Google MapsでGYEOLDAMの位置を見る")}
               >
                 {/* ACCESS 매장 위치를 표시하는 지도 이미지 */}
                 <img
                   className="access-section__map-image"
                   src={`${import.meta.env.BASE_URL}images/home/access-map.png`}
-                  alt="GYEOLDAM 매장 위치를 표시한 지도"
+                  alt={t("GYEOLDAM 매장 위치를 표시한 지도")}
                 />
               </a>
             </div>
@@ -72,9 +74,7 @@ function AccessSection({ useFlowerImage = true }) {
               href={googleMapsUrl}
               target="_blank"
               rel="noreferrer"
-            >
-              Google Mapsで見る →
-            </a>
+            >{t("Google Mapsで見る →")}</a>
           </div>
         </div>
       </Container>

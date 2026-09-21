@@ -1,3 +1,4 @@
+import { useLanguage } from '../i18n/useLanguage.js'
 import { useEffect } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import MyPageNavigation from '../components/mypage/MyPageNavigation.jsx'
@@ -17,6 +18,7 @@ const tabContents = {
 }
 
 function MyPage() {
+  const { t } = useLanguage()
   const location = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
   const requestedTab = searchParams.get('tab') || 'reservations'
@@ -33,8 +35,8 @@ function MyPage() {
   return (
     <div className="mypage-page">
       <header className="mypage-page__hero">
-        <p>MY PAGE</p>
-        <h1>マイページ</h1>
+        <p>{t("MY PAGE")}</p>
+        <h1>{t("マイページ")}</h1>
       </header>
 
       <div className="container mypage-page__layout">

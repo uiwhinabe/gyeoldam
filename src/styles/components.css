@@ -674,23 +674,28 @@
   position: fixed;
   z-index: calc(var(--z-header) + 1);
   top: calc(var(--header-height) + 82px);
-  right: 12px;
+  right: 0;
   display: flex;
-  width: 44px;
-  max-height: calc(100vh - var(--header-height) - 106px);
+  width: 68px;
+  height: 387px;
   flex-direction: column;
   margin: 0;
-  border: 1px solid var(--color-border);
-  background: rgb(251 248 241 / 92%);
-  box-shadow: var(--shadow-soft);
+  padding: 7.833px 0 20.916px 6.333px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 24px 0 0 24px;
+  background: rgb(255 241 226 / 60%);
+  box-shadow: none;
 }
 
 .desktop-sidebar__item {
   display: grid;
   width: 100%;
-  min-height: 48px;
+  flex: 0 0 auto;
+  height: 72px;
+  min-height: 0;
   place-items: center;
-  border-bottom: 1px solid var(--color-border);
+  border: 0;
   color: var(--color-brown-deep);
   font-size: 0.52rem;
   font-weight: 700;
@@ -699,9 +704,10 @@
 
 .desktop-sidebar__icon {
   display: block;
-  width: clamp(22px, 1.8vw, 28px);
-  max-width: 72%;
-  aspect-ratio: 1;
+  width: auto;
+  height: auto;
+  max-width: none;
+  aspect-ratio: auto;
   object-fit: contain;
   object-position: center;
 }
@@ -712,6 +718,26 @@
 
 .desktop-sidebar__item:hover {
   background: var(--color-header);
+}
+
+/* Figma 60:3943. SVG intrinsic sizes include their original strokes. */
+.desktop-sidebar__item:first-child {
+  height: 73.334px;
+}
+
+.desktop-sidebar__item:nth-child(2) {
+  height: 71px;
+}
+
+.desktop-sidebar__item:last-child {
+  height: 70.917px;
+}
+
+/* Match the existing HOME visibility rule on every page. */
+@media (max-width: 768px) {
+  .desktop-sidebar {
+    display: none;
+  }
 }
 
 /* 시술메뉴 화면 전용 세로형 예약 사이드 탭 */
@@ -772,19 +798,6 @@
 
   .treatment-side-reservation a {
     font-size: 0.9rem;
-  }
-}
-
-/* 스티키 바 아이콘은 데스크톱 / 태블릿 / 모바일 세 구간에서만 전환합니다. */
-@media (min-width: 641px) and (max-width: 1024px) {
-  .desktop-sidebar__icon {
-    width: 24px;
-  }
-}
-
-@media (max-width: 640px) {
-  .desktop-sidebar__icon {
-    width: 22px;
   }
 }
 
@@ -2375,8 +2388,7 @@
     justify-self: center;
   }
 
-  .site-shell:has(.home-hero) .site-header__navigation,
-  .site-shell:has(.home-hero) .desktop-sidebar {
+  .site-shell:has(.home-hero) .site-header__navigation {
     display: none;
   }
 

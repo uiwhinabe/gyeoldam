@@ -1,12 +1,16 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useState } from 'react'
 import SectionTitle from '../common/SectionTitle.jsx'
+import LocalizedImageCaption from '../common/LocalizedImageCaption.jsx'
+import { youtubeThumbnailText } from '../../i18n/artworkText.js'
 
 function YoutubeFeature() {
+  const { t } = useLanguage()
   const [isVideoPending, setIsVideoPending] = useState(false)
 
   return (
     <section className="youtube-feature" aria-labelledby="youtube-feature-title">
-      <SectionTitle id="youtube-feature-title" eyebrow="YouTube" title="公式動画" />
+      <SectionTitle id="youtube-feature-title" eyebrow={t("YouTube")} title={t("公式動画")} />
       <div className="youtube-feature__media">
         {/* 홈 공식 유튜브 영상 썸네일
         저장 경로: /images/home/youtube-thumbnail.png
@@ -16,20 +20,21 @@ function YoutubeFeature() {
         <img
           className="youtube-feature__thumbnail"
           src={`${import.meta.env.BASE_URL}images/home/youtube-thumbnail.png`}
-          alt="韓国アートメイクについて紹介するGYEOLDAM公式動画"
+          alt={t("韓国アートメイクについて紹介するGYEOLDAM公式動画")}
         />
         <button
           className="youtube-feature__play"
           type="button"
-          aria-label="動画を再生"
+          aria-label={t("動画を再生")}
           onClick={() => setIsVideoPending(true)}
         >
           {/* TODO: 공식 YouTube 영상 URL 확정 후 영상 재생 동작 연결 */}
           <span aria-hidden="true">▶</span>
         </button>
       </div>
+      <LocalizedImageCaption lines={youtubeThumbnailText} />
       <p className="youtube-feature__status" aria-live="polite">
-        {isVideoPending ? '動画はただいま準備中です。' : 'GYEOLDAM Official YouTube'}
+        {t(isVideoPending ? '動画はただいま準備中です。' : 'GYEOLDAM Official YouTube')}
       </p>
     </section>
   )

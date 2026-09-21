@@ -1,12 +1,14 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { officialSocials } from '../../data/homeContent.js'
 import Container from '../common/Container.jsx'
 import SectionTitle from '../common/SectionTitle.jsx'
 
 function SnsSection() {
+  const { t } = useLanguage()
   return (
     <section id="sns" className="sns-section" aria-labelledby="sns-title">
       <Container>
-        <SectionTitle id="sns-title" eyebrow="Official SNS" title="公式SNS" align="center" />
+        <SectionTitle id="sns-title" eyebrow={t("Official SNS")} title={t("公式SNS")} align="center" />
 
         <div className="sns-section__links">
           {officialSocials.map(({ name, handle, icon }) => (
@@ -14,8 +16,8 @@ function SnsSection() {
               key={name}
               className="sns-link-card"
               type="button"
-              title={`${name} 準備中`}
-              onClick={() => window.alert(`${name} は準備中です。`)}
+              title={t(`${name} 準備中`)}
+              onClick={() => window.alert(t(`${name} は準備中です。`))}
             >
               {/* 각 공식 SNS 서비스의 로고 아이콘 */}
               <span className="sns-link-card__icon" aria-hidden="true">
@@ -25,8 +27,8 @@ function SnsSection() {
                 />
               </span>
               <span className="sns-link-card__content">
-                <span className="sns-link-card__name">{name}</span>
-                <span className="sns-link-card__handle">{handle}</span>
+                <span className="sns-link-card__name">{t(name)}</span>
+                <span className="sns-link-card__handle">{t(handle)}</span>
               </span>
               <span aria-hidden="true">↗</span>
             </button>

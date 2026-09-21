@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useEffect, useRef, useState } from 'react'
 
 const salonSpaces = [
@@ -10,6 +11,7 @@ const salonSpaces = [
 ]
 
 function SalonGallery() {
+  const { t } = useLanguage()
   const [currentIndex, setCurrentIndex] = useState(0)
   const viewportRef = useRef(null)
   const slideRefs = useRef([])
@@ -52,27 +54,27 @@ function SalonGallery() {
   }, [currentIndex])
 
   return (
-    <section className="salon-gallery" aria-label="GYEOLDAM店内写真">
+    <section className="salon-gallery" aria-label={t("GYEOLDAM店内写真")}>
       <div
         className="salon-gallery__carousel"
         role="region"
         aria-roledescription="carousel"
-        aria-label="GYEOLDAM店内写真"
+        aria-label={t("GYEOLDAM店内写真")}
         tabIndex="0"
         onKeyDown={handleKeyDown}
       >
         <div ref={viewportRef} className="salon-gallery__viewport" onScroll={handleScroll}>
           {salonSpaces.map((space, index) => (
-            <figure key={space.id} ref={(node) => { slideRefs.current[index] = node }} className={`salon-gallery__slide salon-gallery__slide--${space.crop}`} aria-label={`${index + 1} / ${salonSpaces.length}: ${space.label}`}>
-              <img src={`${import.meta.env.BASE_URL}images/about/space/${space.image}`} alt={space.imageAlt} />
+            <figure key={space.id} ref={(node) => { slideRefs.current[index] = node }} className={`salon-gallery__slide salon-gallery__slide--${space.crop}`} aria-label={t(`${index + 1} / ${salonSpaces.length}: ${space.label}`)}>
+              <img src={`${import.meta.env.BASE_URL}images/about/space/${space.image}`} alt={t(space.imageAlt)} />
             </figure>
           ))}
         </div>
 
-        <button className="salon-gallery__arrow salon-gallery__arrow--prev" type="button" onClick={() => moveTo(currentIndex - 1)} aria-label="前の店内写真">←</button>
-        <button className="salon-gallery__arrow salon-gallery__arrow--next" type="button" onClick={() => moveTo(currentIndex + 1)} aria-label="次の店内写真">→</button>
-        <p className="salon-gallery__counter" aria-live="polite">{String(currentIndex + 1).padStart(2, '0')} / {String(salonSpaces.length).padStart(2, '0')}</p>
-        <p className="salon-gallery__caption">GYEOLDAMの店内写真です。</p>
+        <button className="salon-gallery__arrow salon-gallery__arrow--prev" type="button" onClick={() => moveTo(currentIndex - 1)} aria-label={t("前の店内写真")}>←</button>
+        <button className="salon-gallery__arrow salon-gallery__arrow--next" type="button" onClick={() => moveTo(currentIndex + 1)} aria-label={t("次の店内写真")}>→</button>
+        <p className="salon-gallery__counter" aria-live="polite">{t(String(currentIndex + 1).padStart(2, '0'))} / {t(String(salonSpaces.length).padStart(2, '0'))}</p>
+        <p className="salon-gallery__caption">{t("GYEOLDAMの店内写真です。")}</p>
       </div>
     </section>
   )

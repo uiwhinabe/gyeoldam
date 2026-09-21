@@ -1,13 +1,15 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import ReservationCalendar from './ReservationCalendar.jsx'
 import ReservationTimeSelector from './ReservationTimeSelector.jsx'
 
 function ReservationSchedule(props) {
+  const { t } = useLanguage()
   return (
     <section className="reservation-schedule" aria-labelledby="reservation-schedule-title">
       <div className="container">
         <header className="reservation-schedule__heading">
-          <p>STEP 02</p>
-          <h2 id="reservation-schedule-title">日時を選択</h2>
+          <p>{t("STEP 02")}</p>
+          <h2 id="reservation-schedule-title">{t("日時を選択")}</h2>
         </header>
         <div className="reservation-schedule__layout">
           <ReservationCalendar {...props} />

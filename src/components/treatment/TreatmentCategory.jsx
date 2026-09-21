@@ -1,14 +1,16 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import Container from '../common/Container.jsx'
 import ImagePlaceholder from '../common/ImagePlaceholder.jsx'
 import { formatDirectorSurcharge, formatTreatmentPrice } from '../../data/treatments.js'
 
 function TreatmentCategory({ category }) {
+  const { t } = useLanguage()
   return (
     <section id={category.id} className="treatment-category" aria-labelledby={`${category.id}-title`}>
       <Container>
         <header className="treatment-category__header">
-          <p>{category.tabLabel}</p>
-          <h2 id={`${category.id}-title`}>{category.title}</h2>
+          <p>{t(category.tabLabel)}</p>
+          <h2 id={`${category.id}-title`}>{t(category.title)}</h2>
         </header>
 
         <div className="treatment-category__items">
@@ -20,24 +22,24 @@ function TreatmentCategory({ category }) {
                 data의 image 필드에 실제 이미지 경로 추가 시 img로 자동 교체
                 */}
                 {item.image ? (
-                  <img src={item.image} alt={item.imageAlt} />
+                  <img src={item.image} alt={t(item.imageAlt)} />
                 ) : (
                   <ImagePlaceholder
-                    label={`${category.tabLabel} ${String(index + 1).padStart(2, '0')}`}
+                    label={t(`${category.tabLabel} ${String(index + 1).padStart(2, '0')}`)}
                     aspectRatio="1 / 1"
-                    ariaLabel={`${item.imageAlt} 画像準備中`}
+                    ariaLabel={t(`${item.imageAlt} 画像準備中`)}
                   />
                 )}
               </div>
               <div className="treatment-item__content">
-                <p className="treatment-item__number">{String(index + 1).padStart(2, '0')}</p>
-                <h3>{item.name}</h3>
-                <p className="treatment-item__description">{item.description}</p>
+                <p className="treatment-item__number">{t(String(index + 1).padStart(2, '0'))}</p>
+                <h3>{t(item.name)}</h3>
+                <p className="treatment-item__description">{t(item.description)}</p>
                 <div className="treatment-item__price">
-                  <span>施術料金</span>
-                  <strong>{formatTreatmentPrice(item)}</strong>
+                  <span>{t("施術料金")}</span>
+                  <strong>{t(formatTreatmentPrice(item))}</strong>
                 </div>
-                {item.directorSurcharge > 0 && <p className="treatment-item__director">※ 院長指名　{formatDirectorSurcharge(item)}</p>}
+                {item.directorSurcharge > 0 && <p className="treatment-item__director">{t("※ 院長指名　")}{t(formatDirectorSurcharge(item))}</p>}
               </div>
             </article>
           ))}

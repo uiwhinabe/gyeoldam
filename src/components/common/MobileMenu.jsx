@@ -1,8 +1,10 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { primaryNavigation } from '../../data/navigation.js'
 
 function MobileMenu({ isOpen, onClose }) {
+  const { t } = useLanguage()
   useEffect(() => {
     if (!isOpen) return undefined
 
@@ -25,24 +27,24 @@ function MobileMenu({ isOpen, onClose }) {
       <button
         className="mobile-menu__dim"
         type="button"
-        aria-label="メニューを閉じる"
+        aria-label={t("メニューを閉じる")}
         tabIndex={isOpen ? 0 : -1}
         onClick={onClose}
       />
-      <aside id="mobile-navigation" className="mobile-menu__panel" aria-label="モバイルメニュー">
+      <aside id="mobile-navigation" className="mobile-menu__panel" aria-label={t("モバイルメニュー")}>
         <div className="mobile-menu__header">
-          <span className="mobile-menu__logo">GYEOLDAM</span>
+          <span className="mobile-menu__logo">{t("GYEOLDAM")}</span>
           <button
             className="mobile-menu__close"
             type="button"
-            aria-label="メニューを閉じる"
+            aria-label={t("メニューを閉じる")}
             tabIndex={isOpen ? 0 : -1}
             onClick={onClose}
           >
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <nav className="mobile-menu__navigation" aria-label="モバイルメインメニュー">
+        <nav className="mobile-menu__navigation" aria-label={t("モバイルメインメニュー")}>
           {primaryNavigation.map(({ label, to, end }) => (
             <NavLink
               key={to}
@@ -54,7 +56,7 @@ function MobileMenu({ isOpen, onClose }) {
               tabIndex={isOpen ? 0 : -1}
               onClick={onClose}
             >
-              <span>{label}</span>
+              <span>{t(label)}</span>
               <span aria-hidden="true">→</span>
             </NavLink>
           ))}

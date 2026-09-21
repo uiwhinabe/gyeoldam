@@ -1,6 +1,8 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { Link } from 'react-router-dom'
 
 function HomeHero() {
+  const { t } = useLanguage()
   return (
     <section id="home" className="home-hero" aria-labelledby="home-hero-title">
       {/* 홈 히어로 전체 매장 배경 이미지
@@ -11,7 +13,7 @@ function HomeHero() {
       <img
         className="home-hero__background"
         src={`${import.meta.env.BASE_URL}images/home/gyeoldam-main.png`}
-        alt="GYEOLDAM サロンの受付と施術スペース"
+        alt={t("GYEOLDAM サロンの受付と施術スペース")}
       />
 
       <div className="container home-hero__inner">
@@ -21,16 +23,14 @@ function HomeHero() {
           Vite BASE_URL을 사용해 로컬과 GitHub Pages에서 같은 이미지로 연결
           세로형 예약 카드 전체를 채우는 상담 이미지로 사용
           */}
-          <img src={`${import.meta.env.BASE_URL}images/home/reservation-visual.png`} alt="眉の施術前カウンセリング" />
+          <img src={`${import.meta.env.BASE_URL}images/home/reservation-visual.png`} alt={t("眉の施術前カウンセリング")} />
           <div className="home-hero__reservation-overlay" aria-hidden="true" />
           <div className="home-hero__reservation-content">
             <h1 id="home-hero-title">
-              <span>あなたらしい美しさを、もっと美しく。</span>
-              <span>一人ひとりに寄り添う、丁寧な施術を。</span>
+              <span>{t("あなたらしい美しさを、もっと美しく。")}</span>
+              <span>{t("一人ひとりに寄り添う、丁寧な施術を。")}</span>
             </h1>
-            <Link className="home-hero__reservation-button" to="/reservation">
-              ご予約はこちら
-              <span aria-hidden="true">▲</span>
+            <Link className="home-hero__reservation-button" to="/reservation">{t("ご予約はこちら")}<span aria-hidden="true">▲</span>
             </Link>
           </div>
         </article>

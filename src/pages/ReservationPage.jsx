@@ -1,3 +1,4 @@
+import { useLanguage } from '../i18n/useLanguage.js'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import DirectorBottomSheet from '../components/reservation/DirectorBottomSheet.jsx'
@@ -25,6 +26,7 @@ const createReservationItem = (treatment, directorSelected = false) => {
 }
 
 function ReservationPage() {
+  const { t, locale } = useLanguage()
   const location = useLocation()
   const [activeCategory, setActiveCategory] = useState(treatmentCategories[0].id)
   const [selectedTreatments, setSelectedTreatments] = useState(() => {
@@ -140,16 +142,16 @@ function ReservationPage() {
   }
 
   const formattedReservationDate = selectedDate
-    ? new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })
+    ? new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long', day: 'numeric' })
       .format(new Date(`${selectedDate}T00:00:00`))
     : null
 
   return (
     <div className="reservation-page">
       <header className="reservation-page__hero">
-        <p>STEP 01</p>
-        <h1>RESERVATION</h1>
-        <span>ご希望の施術をお選びください。</span>
+        <p>{t("STEP 01")}</p>
+        <h1>{t("RESERVATION")}</h1>
+        <span>{t("ご希望の施術をお選びください。")}</span>
       </header>
 
       <ReservationTabs categories={treatmentCategories} activeCategory={activeCategory} onSelect={setActiveCategory} />
@@ -158,10 +160,10 @@ function ReservationPage() {
         <div className="container">
           <div className="reservation-selection__heading">
             <div>
-              <p>{currentCategory.tabLabel}</p>
-              <h2 id="reservation-category-title">{currentCategory.title}</h2>
+              <p>{t(currentCategory.tabLabel)}</p>
+              <h2 id="reservation-category-title">{t(currentCategory.title)}</h2>
             </div>
-            <span aria-live="polite">選択 {selectedTreatments.length}件</span>
+            <span aria-live="polite">{t(`選択 ${selectedTreatments.length}件`)}</span>
           </div>
 
           <div className="reservation-selection__grid">

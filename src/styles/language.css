@@ -1,0 +1,109 @@
+.site-header__language {
+  position: relative;
+  justify-self: end;
+  flex-shrink: 0;
+  width: max-content;
+}
+
+.language-selector__trigger {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 0;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.language-selector__trigger svg {
+  flex-shrink: 0;
+  height: 17px;
+}
+
+.site-header__language .language-selector__arrow {
+  width: 12px;
+  height: 12px;
+}
+
+.language-selector__menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1;
+  width: 104px;
+  padding: 5px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-background);
+  box-shadow: var(--shadow-soft);
+}
+
+.language-selector__menu button {
+  display: flex;
+  width: 100%;
+  min-height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 2px;
+}
+
+.language-selector__menu button:hover,
+.language-selector__menu button:focus-visible,
+.language-selector__menu button[aria-checked='true'] {
+  background: var(--color-header);
+}
+
+/* Keep translated labels within their existing layout slots. */
+html:not(:lang(ja)) .site-header__link {
+  white-space: normal;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+html:not(:lang(ja)) :is(h1, h2, h3, p, dt, dd, button, .primary-button) {
+  overflow-wrap: anywhere;
+}
+
+html:not(:lang(ja)) .treatment-side-reservation a {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+html:not(:lang(ja)) .home-hero__reservation-button {
+  height: auto;
+}
+
+html:not(:lang(ja)) .login-form__options {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+html:not(:lang(ja)) .reservation-tabs__button {
+  white-space: normal;
+}
+
+@media (max-width: 900px) {
+  html:not(:lang(ja)) .mypage-navigation {
+    min-width: 0;
+  }
+
+  html:not(:lang(ja)) .mypage-page__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.localized-image-caption {
+  margin-block: 8px;
+  color: var(--color-text);
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+
+.localized-image-caption summary {
+  cursor: pointer;
+}
+
+.localized-image-caption p {
+  margin-top: 6px;
+}

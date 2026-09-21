@@ -1,8 +1,10 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { exampleUnavailableDates, reservationWeekdays, toLocalISO } from '../../data/reservationAvailability.js'
 
 const sameMonth = (left, right) => left.getFullYear() === right.getFullYear() && left.getMonth() === right.getMonth()
 
 function ReservationCalendar({ displayMonth, selectedDate, onMonthChange, onDateSelect }) {
+  const { t, language, locale } = useLanguage()
   const year = displayMonth.getFullYear()
   const month = displayMonth.getMonth()
   const firstDayIndex = new Date(year, month, 1).getDay()
@@ -16,13 +18,13 @@ function ReservationCalendar({ displayMonth, selectedDate, onMonthChange, onDate
   return (
     <section className="reservation-calendar" aria-labelledby="calendar-title">
       <div className="reservation-calendar__header">
-        <button type="button" onClick={() => moveMonth(-1)} disabled={isCurrentMonth} aria-label="前の月">←</button>
-        <h2 id="calendar-title">{year}年 {String(month + 1).padStart(2, '0')}月</h2>
-        <button type="button" onClick={() => moveMonth(1)} aria-label="次の月">→</button>
+        <button type="button" onClick={() => moveMonth(-1)} disabled={isCurrentMonth} aria-label={t("前の月")}>←</button>
+        <h2 id="calendar-title">{language === 'JP' ? `${year}年 ${String(month + 1).padStart(2, '0')}月` : new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long' }).format(displayMonth)}</h2>
+        <button type="button" onClick={() => moveMonth(1)} aria-label={t("次の月")}>→</button>
       </div>
 
       <div className="reservation-calendar__weekdays" aria-hidden="true">
-        {reservationWeekdays.map((weekday) => <span key={weekday}>{weekday}</span>)}
+        {reservationWeekdays.map((weekday) => <span key={weekday}>{t(weekday)}</span>)}
       </div>
 
       <div className="reservation-calendar__days">
@@ -44,15 +46,15 @@ function ReservationCalendar({ displayMonth, selectedDate, onMonthChange, onDate
               type="button"
               disabled={isDisabled}
               aria-pressed={isSelected}
-              aria-label={`${year}年${month + 1}月${day}日${isDisabled ? ' 予約不可' : ''}`}
+              aria-label={`${language === 'JP' ? `${year}年${month + 1}月${day}日` : new Intl.DateTimeFormat(locale, { dateStyle: 'long' }).format(date)}${isDisabled ? t(' 予約不可') : ''}`}
               onClick={() => onDateSelect(dateISO)}
             >
-              {day}
+              {t(day)}
             </button>
           )
         })}
       </div>
-      <p className="reservation-calendar__note"><span aria-hidden="true" /> 予約不可・休業日</p>
+      <p className="reservation-calendar__note"><span aria-hidden="true" />{t(" 予約不可・休業日")}</p>
     </section>
   )
 }

@@ -1,3 +1,4 @@
+import { useLanguage } from '../i18n/useLanguage.js'
 import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import CancelConfirmModal from '../components/mypage/CancelConfirmModal.jsx'
@@ -7,6 +8,7 @@ import { applyDemoReservationOverride, getDemoCreatedReservations, saveDemoReser
 const cancellationReasons = ['予定が合わなくなった', '体調・個人的な事情', '別の予定が入った', 'その他']
 
 function ReservationCancelPage() {
+  const { t } = useLanguage()
   const { id } = useParams()
   const navigate = useNavigate()
   const [reason, setReason] = useState('')
@@ -15,7 +17,7 @@ function ReservationCancelPage() {
   const source = [...getDemoCreatedReservations(), ...mypageReservations.upcoming].find((item) => item.id === id)
   const reservation = source ? applyDemoReservationOverride(source) : null
 
-  if (!reservation) return <div className="reservation-manage-empty"><h1>予約情報が見つかりません。</h1><Link to="/mypage">マイページへ戻る</Link></div>
+  if (!reservation) return <div className="reservation-manage-empty"><h1>{t("予約情報が見つかりません。")}</h1><Link to="/mypage">{t("マイページへ戻る")}</Link></div>
 
   const confirmCancellation = () => {
     // 실제 서버 취소가 아닌 프로토타입 상태 저장입니다. 실제 예약 취소 API 연결 후 교체하세요.
@@ -33,32 +35,32 @@ function ReservationCancelPage() {
     return (
       <div className="reservation-cancel-complete">
         <span aria-hidden="true">✓</span>
-        <h1>ご予約をキャンセルしました。</h1>
-        <p>またのご利用を心よりお待ちしております。</p>
-        <Link to="/mypage">予約一覧へ戻る</Link>
+        <h1>{t("ご予約をキャンセルしました。")}</h1>
+        <p>{t("またのご利用を心よりお待ちしております。")}</p>
+        <Link to="/mypage">{t("予約一覧へ戻る")}</Link>
       </div>
     )
   }
 
   return (
     <div className="reservation-cancel-page">
-      <header className="reservation-manage-page__hero"><p>CANCEL RESERVATION</p><h1>予約をキャンセル</h1></header>
+      <header className="reservation-manage-page__hero"><p>{t("CANCEL RESERVATION")}</p><h1>{t("予約をキャンセル")}</h1></header>
       <div className="container reservation-cancel-page__content">
         <section className="reservation-current-card" aria-labelledby="cancel-reservation-title">
-          <p>RESERVATION TO CANCEL</p><h2 id="cancel-reservation-title">キャンセルするご予約</h2>
+          <p>{t("RESERVATION TO CANCEL")}</p><h2 id="cancel-reservation-title">{t("キャンセルするご予約")}</h2>
           <dl>
-            <div><dt>予約日時</dt><dd>{reservation.date} ({reservation.weekday}) {reservation.time}</dd></div>
-            <div><dt>施術</dt><dd>{reservation.treatments.join(' ＋ ')}</dd></div>
-            <div><dt>担当者</dt><dd>{reservation.artist}</dd></div>
-            <div><dt>予約番号</dt><dd>{reservation.id}</dd></div>
+            <div><dt>{t("予約日時")}</dt><dd>{t(reservation.date)} ({t(reservation.weekday)}) {t(reservation.time)}</dd></div>
+            <div><dt>{t("施術")}</dt><dd>{t(reservation.treatments.join(' ＋ '))}</dd></div>
+            <div><dt>{t("担当者")}</dt><dd>{t(reservation.artist)}</dd></div>
+            <div><dt>{t("予約番号")}</dt><dd>{t(reservation.id)}</dd></div>
           </dl>
         </section>
 
         <fieldset className="reservation-cancel-reasons">
-          <legend>キャンセル理由を選択してください。</legend>
-          {cancellationReasons.map((item) => <label key={item}><input type="radio" name="cancel-reason" value={item} checked={reason === item} onChange={(event) => setReason(event.target.value)} /><span>{item}</span></label>)}
+          <legend>{t("キャンセル理由を選択してください。")}</legend>
+          {cancellationReasons.map((item) => <label key={item}><input type="radio" name="cancel-reason" value={item} checked={reason === item} onChange={(event) => setReason(event.target.value)} /><span>{t(item)}</span></label>)}
         </fieldset>
-        <div className="reservation-cancel-page__actions"><button type="button" onClick={() => navigate(-1)}>戻る</button><button type="button" disabled={!reason} onClick={() => setIsConfirmOpen(true)}>予約キャンセルを進める</button></div>
+        <div className="reservation-cancel-page__actions"><button type="button" onClick={() => navigate(-1)}>{t("戻る")}</button><button type="button" disabled={!reason} onClick={() => setIsConfirmOpen(true)}>{t("予約キャンセルを進める")}</button></div>
       </div>
       <CancelConfirmModal isOpen={isConfirmOpen} onClose={() => setIsConfirmOpen(false)} onConfirm={confirmCancellation} />
     </div>
