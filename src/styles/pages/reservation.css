@@ -187,7 +187,8 @@
   .reservation-treatment-card__price { display: grid; gap: 1px; }
 }
 @media (max-width: 767px) {
-  .reservation-selection__grid { grid-template-columns: 334px; }
+  .reservation-selection__grid { grid-template-columns: minmax(0, min(100%, 334px)); }
+  .reservation-treatment-card { width: 100%; grid-template-columns: minmax(0, 104fr) minmax(0, 230fr); }
 }
 @media (max-width: 834px) {
   .reservation-schedule__layout { grid-template-columns: 1fr; }

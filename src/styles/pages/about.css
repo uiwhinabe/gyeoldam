@@ -234,7 +234,7 @@
   .director-profile__content li { padding-block: 8px; font-size: .9rem; }
   .director-profile__message { margin-top: 72px; font-size: .76rem; text-align: center; }
   .staff-section { padding: 96px 0 164px; }
-  .staff-carousel { --staff-card-width: min(60vw, 499px); width: 100vw; margin-left: calc((100vw - 100%) / -2); }
+  .staff-carousel { --staff-card-width: min(60vw, 499px); width: 100%; margin-inline: auto; }
   .about-reservation-banner { height: 376px; }
   .about-reservation-banner::before, .about-reservation-banner::after { display: none; }
   .about-reservation-banner__content h2, .about-reservation-banner__content > p { font-size: 1.25rem; }
@@ -256,7 +256,7 @@
   .brand-feature h3 { padding: 5px 15px; font-size: .72rem; }
   .brand-feature p { margin-top: 10px; font-size: .56rem; line-height: 1.6; }
   /* Preserve the former stacked layout's height: two text groups plus spacing. */
-  .brand-story__records { width: 320px; min-height: calc(2 * (1.5rem + .85rem) * 1.7 + 51px); margin-top: 75px; padding: 10px 0; }
+  .brand-story__records { width: min(100%, 320px); min-height: calc(2 * (1.5rem + .85rem) * 1.7 + 51px); margin-top: 75px; padding: 10px 0; }
   .brand-story__records::before { top: 10px; bottom: 10px; left: calc(50% - .5px); width: 1px; }
   .brand-story__records strong { font-size: 1.5rem; }
   .brand-story__records span { margin-top: 5px; font-size: .85rem; }
@@ -272,7 +272,7 @@
   .salon-gallery__caption, .salon-gallery__counter { display: none; }
   .about-people-frame { width: min(calc(100% - 52px), 350px); }
   .director-profile { padding-top: 31px; }
-  .director-profile__media { width: 280px; height: 374px; }
+  .director-profile__media { width: min(100%, 280px); height: 374px; }
   .director-profile__content h2 { margin-top: 38px; font-size: 1.05rem; text-shadow: none; }
   .director-profile__role { margin-top: 34px; font-size: .72rem; }
   .director-profile__name { font-size: .62rem; }
@@ -280,8 +280,8 @@
   .director-profile__content li { padding-block: 7px; font-size: .52rem; }
   .director-profile__message { width: calc(100% - 40px); margin-top: 42px; font-size: .45rem; line-height: 1.65; }
   .staff-section { padding: 80px 0 147px; }
-  .staff-carousel { --staff-card-width: 300px; margin-left: calc((100vw - 100%) / -2); }
-  .staff-card { width: 300px; height: 150px; padding: 15px 12px; grid-template-columns: 101px minmax(0, 1fr); gap: 12px; }
+  .staff-carousel { --staff-card-width: min(300px, calc(100% - 40px)); }
+  .staff-card { width: var(--staff-card-width); height: 150px; padding: 15px 12px; grid-template-columns: minmax(0, 101px) minmax(0, 1fr); gap: 12px; }
   .staff-card__media { height: 120px; }
   .about-reservation-banner { height: 256px; }
   .about-reservation-banner__background { object-position: center; }
