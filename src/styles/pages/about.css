@@ -280,9 +280,25 @@
   .director-profile__content li { padding-block: 7px; font-size: .52rem; }
   .director-profile__message { width: calc(100% - 40px); margin-top: 42px; font-size: .45rem; line-height: 1.65; }
   .staff-section { padding: 80px 0 147px; }
-  .staff-carousel { --staff-card-width: min(300px, calc(100% - 40px)); }
-  .staff-card { width: var(--staff-card-width); height: 150px; padding: 15px 12px; grid-template-columns: minmax(0, 101px) minmax(0, 1fr); gap: 12px; }
-  .staff-card__media { height: 120px; }
+  .staff-carousel { --staff-card-width: min(100%, 300px); }
+  .staff-carousel__window, .staff-carousel__viewport { width: 100%; max-width: 100%; }
+  .staff-carousel__track { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, min(100cqw, 300px)); align-items: stretch; padding-inline: max(0px, calc((100cqw - min(100cqw, 300px)) / 2)); }
+  .staff-carousel__viewport { container-type: inline-size; scroll-padding-inline: max(0px, calc((100% - var(--staff-card-width)) / 2)); }
+  .staff-card { width: 100%; max-width: 300px; height: auto; min-height: 150px; padding: 12px; grid-template-columns: minmax(0, 34%) minmax(0, 1fr); gap: 12px; }
+  .staff-card__media { width: 100%; height: auto; aspect-ratio: 168 / 202; align-self: start; }
+  .staff-card__portrait { max-width: none; object-fit: cover; object-position: center; transform: none; }
+  .staff-card__portrait--seoyeon { top: 0; left: -9.5%; width: 359.5%; height: 199%; }
+  .staff-card__portrait--minji { top: 0; left: -251.2%; width: 360.7%; height: 199%; }
+  .staff-card__portrait--jieun { top: -100%; left: -9.5%; width: 360.1%; height: 199%; }
+  .staff-card__portrait--hyunwoo { top: -100%; left: -129.8%; width: 358.9%; height: 199%; }
+  .staff-card__portrait--yuna { top: -100%; left: -200.6%; width: 301.2%; height: 200.5%; }
+  .staff-card__content { min-width: 0; padding-top: 0; overflow-wrap: anywhere; }
+  .staff-card__description { margin-top: 8px; }
+  .staff-card a { width: 100%; min-width: 0; min-height: 36px; margin-top: 8px; padding: 4px 6px; gap: 4px; }
+  .staff-card a span:last-child { min-width: 0; overflow-wrap: anywhere; white-space: normal; }
+  .staff-card__instagram-icon { width: 22px; height: 22px; }
+  .staff-carousel__arrow--prev { left: 0; }
+  .staff-carousel__arrow--next { right: 0; }
   .about-reservation-banner { height: 256px; }
   .about-reservation-banner__background { object-position: center; }
   .about-reservation-banner__content h2, .about-reservation-banner__content > p { font-size: .85rem; }
